@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Realty_Management_System_Domain\Realty_Management_System_Domain.csproj" />
+  </ItemGroup>
+
 </Project>

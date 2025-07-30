@@ -14,6 +14,9 @@ namespace Realty_Real_Estate_Management_System
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Identity service 
+            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

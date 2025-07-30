@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Presentation", "Realty_Management_System_Presentation\Realty_Management_System_Presentation.csproj", "{7BB97D24-2454-14BC-824A-8A7CD287BA2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_App", "Realty_Management_System_App\Realty_Management_System_App.csproj", "{7BB97D24-2454-14BC-824A-8A7CD287BA2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Service", "Realty_Real_Estate_Management_System_Service\Realty_Management_System_Service.csproj", "{AB17E53F-7493-DB9F-EF0F-27C959590FBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Service", "Realty_Management_System_Service\Realty_Management_System_Service.csproj", "{AB17E53F-7493-DB9F-EF0F-27C959590FBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Domain", "Realty_Management_System_Domain\Realty_Management_System_Domain.csproj", "{CB69F98A-6373-4DF7-8F40-ABC58122DDDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Infrastructure", "Realty_Management_System_Infrastructure\Realty_Management_System_Infrastructure.csproj", "{D469A1E8-B0CE-428F-9E5A-F102DF87D7E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realty_Management_System_Persistence", "Realty_Management_System_Persistence\Realty_Management_System_Persistence.csproj", "{D469A1E8-B0CE-428F-9E5A-F102DF87D7E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
