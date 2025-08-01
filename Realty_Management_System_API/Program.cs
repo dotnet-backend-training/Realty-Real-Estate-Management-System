@@ -1,4 +1,8 @@
 
+using Microsoft.AspNetCore.Identity;
+using Realty_Management_System_Api.DependencyInjection;
+using Realty_Management_System_Domain.Entities;
+
 namespace Realty_Real_Estate_Management_System
 {
     public class Program
@@ -14,8 +18,8 @@ namespace Realty_Real_Estate_Management_System
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Identity service 
-            
+            // Persistence services layer
+            builder.Services.AddPersistenceServices(builder.Configuration);
 
             var app = builder.Build();
 
