@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Domain.Interfaces;
+using Realty_Management_System_Infrastructure.Data;
+using Realty_Management_System_Infrastructure.Repositories;
 
 namespace Realty_Management_System_Api.DependencyInjection
 {
@@ -7,9 +11,13 @@ namespace Realty_Management_System_Api.DependencyInjection
     {
         public static void AddInfrastructureServices(
             this IServiceCollection services,
-            IConfiguration configuration
+            IAppsettingsRepository appsettingsRepository
             )
         {
+            // Singleton appSetting configuration
+            services.AddSingleton<IAppsettingsRepository, AppsettingsRepository>();
+
+            // Identity configuration
             services.AddIdentity<User, IdentityRole<int>>(
                 options =>
                 {
@@ -21,6 +29,15 @@ namespace Realty_Management_System_Api.DependencyInjection
                 }
             );
 
+            // ApplicationDbContext configuration
+            string connectionStrings = appsettingsRepository.GetDefaultConnection();
+
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                {
+                    options.UseSqlServer(connectionStrings);
+                }
+            );
         }
 
     }

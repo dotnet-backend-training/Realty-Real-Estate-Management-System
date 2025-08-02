@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Realty_Management_System_Domain.Entities;
 
-namespace Realty_Management_System_Infrastructure.Configurations
+namespace Realty_Management_System_Infrastructure.Persistence.Configurations
 {
     public class ZoneConfiguration : IEntityTypeConfiguration<Zone>
     {
