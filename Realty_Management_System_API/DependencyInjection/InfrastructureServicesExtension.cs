@@ -3,9 +3,9 @@ using Realty_Management_System_Domain.Entities;
 
 namespace Realty_Management_System_Api.DependencyInjection
 {
-    public static class PersistenceServicesExtension
+    public static class InfrastructureServicesExtension
     {
-        public static void AddPersistenceServices(
+        public static void AddInfrastructureServices(
             this IServiceCollection services,
             IConfiguration configuration
             )

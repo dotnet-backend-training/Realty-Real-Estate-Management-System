@@ -18,8 +18,9 @@ namespace Realty_Real_Estate_Management_System
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Persistence services layer
-            builder.Services.AddPersistenceServices(builder.Configuration);
+            // Infrastructure services layer
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+
 
             var app = builder.Build();
 
