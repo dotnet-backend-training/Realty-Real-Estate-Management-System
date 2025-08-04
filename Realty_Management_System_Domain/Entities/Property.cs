@@ -7,8 +7,8 @@
         public int NumberOfBathrooms { get; set; }
         public int NumberOfFloors { get; set; }
         public int NumberOfBedrooms { get; set; }
-        public decimal Price { get; set; }
         public int NumberOfGarage { get; set; }
+        public decimal Price { get; set; }
         public DateTime YearBuilt { get; set; }
         public Guid PropertyStatusId { get; set; }
         public PropertyStatus PropertyStatus { get; set; } = default!;
