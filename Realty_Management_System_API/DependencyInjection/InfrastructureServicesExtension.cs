@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Interfaces;
-using Realty_Management_System_Infrastructure.Data;
+using Realty_Management_System_Infrastructure.Data.Contexts;
 using Realty_Management_System_Infrastructure.Repositories;
 
 namespace Realty_Management_System_Api.DependencyInjection

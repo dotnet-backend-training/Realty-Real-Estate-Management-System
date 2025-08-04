@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Realty_Management_System_Domain.Entities;
 using System.Reflection;
 
-namespace Realty_Management_System_Infrastructure.Data
+namespace Realty_Management_System_Infrastructure.Data.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>,int>
     {

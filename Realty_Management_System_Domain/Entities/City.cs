@@ -5,8 +5,9 @@
         public string Name { get; set; } = string.Empty;
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
-        public int CountryId { get; set; }
+        public Guid CountryId { get; set; }
         public Country Country { get; set; } = default!;
         public ICollection<Zone> Zones { get; set; } = new HashSet<Zone>();
+        public ICollection<User> Users { get; set; } = new HashSet<User>();
     }
 }

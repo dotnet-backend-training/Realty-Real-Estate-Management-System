@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Realty_Management_System_Application\Realty_Management_System_Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\DataSeed\" />
+  </ItemGroup>
+
 </Project>
