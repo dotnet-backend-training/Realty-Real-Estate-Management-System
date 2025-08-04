@@ -7,5 +7,6 @@
         public ICollection<User> Users { get; set; } = new HashSet<User>();
         public ICollection<City> Cities { get; set; } = new HashSet<City>();
         public ICollection<Zone> Zones { get; set; } = new HashSet<Zone>();
+        public ICollection<Property> Properties { get; set; } = new HashSet<Property>();
     }
 }

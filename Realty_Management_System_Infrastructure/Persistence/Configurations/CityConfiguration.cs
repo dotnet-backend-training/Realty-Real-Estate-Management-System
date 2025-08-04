@@ -39,6 +39,15 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(zone => zone.City)
                 .HasForeignKey(zone => zone.CityId)
                 .OnDelete(DeleteBehavior.Restrict);
+            /*
+            * City -> Property
+            * Each City has many Properties
+            * Each Property belongs to one City.
+            */
+            builder.HasMany(city => city.Properties)
+                .WithOne(property => property.City)
+                .HasForeignKey(property => property.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

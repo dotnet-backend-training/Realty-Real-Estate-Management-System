@@ -11,5 +11,6 @@
         public Guid CityId { get; set; }
         public City City { get; set; } = default!;
         public ICollection<User> Users { get; set; } = new HashSet<User>();
+        public ICollection<Property> Properties { get; set; } = default!;
     }
 }

@@ -12,5 +12,11 @@
         public DateTime YearBuilt { get; set; }
         public Guid PropertyStatusId { get; set; }
         public PropertyStatus PropertyStatus { get; set; } = default!;
+        public Guid CountryId { get; set; }
+        public Country Country { get; set; } = default!;
+        public Guid CityId { get; set; }
+        public City City { get; set; } = default!;
+        public Guid ZoneId { get; set; }
+        public Zone Zone { get; set; } = default!;
     }
 }

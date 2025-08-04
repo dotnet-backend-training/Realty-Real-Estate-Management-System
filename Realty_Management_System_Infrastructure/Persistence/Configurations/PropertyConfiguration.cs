@@ -46,6 +46,34 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(propertyStatus => propertyStatus.Properties)
                 .HasForeignKey(property => property.PropertyStatusId)
                 .OnDelete(DeleteBehavior.Restrict);
+            /*
+            * Property -> Country
+            * Each property belongs to one Country .
+            * Each Country has many Properties
+            */
+            builder.HasOne(property => property.Country)
+                .WithMany(country => country.Properties)
+                .HasForeignKey(property => property.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+            /*
+            * Property -> City
+            * Each property belongs to one City.
+            * Each City has many Properties
+            */
+            builder.HasOne(property => property.City)
+                .WithMany(city => city.Properties)
+                .HasForeignKey(property => property.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> Zone
+            * Each property belongs to one Zone.
+            * Each Zone has many Properties
+            */
+            builder.HasOne(property => property.Zone)
+                .WithMany(zone => zone.Properties)
+                .HasForeignKey(property => property.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

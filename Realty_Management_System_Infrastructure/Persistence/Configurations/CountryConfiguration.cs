@@ -19,24 +19,34 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .HasMaxLength(5);
 
             /*
-             * Country -> City
-             * Each Country has many Cities.
-             * Each City belongs to one Country.
-             */
+            * Country -> City
+            * Each Country has many Cities.
+            * Each City belongs to one Country.
+            */
             builder.HasMany(country => country.Cities)
                 .WithOne(city => city.Country)
                 .HasForeignKey(city => city.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             /*
-             * Country -> Zone
-             * Each Country has many Zones.
-             * Each Zone belongs to one Country.
-             */
+            * Country -> Zone
+            * Each Country has many Zones.
+            * Each Zone belongs to one Country.
+            */
             builder.HasMany(country => country.Zones)
                 .WithOne(zone => zone.Country)
                 .HasForeignKey(zone => zone.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Country -> Property
+            * Each Country has many Properties.
+            * Each Property belongs to one Country.
+            */
+            builder.HasMany(country => country.Properties)
+               .WithOne(property => property.Country)
+               .HasForeignKey(property => property.CountryId)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
