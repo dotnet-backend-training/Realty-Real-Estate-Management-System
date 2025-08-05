@@ -18,5 +18,7 @@
         public City City { get; set; } = default!;
         public Guid ZoneId { get; set; }
         public Zone Zone { get; set; } = default!;
+
+        public ICollection<PropertyImage> PropertyImages = new HashSet<PropertyImage>();
     }
 }

@@ -74,6 +74,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(zone => zone.Properties)
                 .HasForeignKey(property => property.ZoneId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyImage
+            * One Property has many PropertyImages
+            * Each PropertyImage belongs to one Property 
+            */
+            builder.HasMany(property => property.PropertyImages)
+                .WithOne(propertyImage => propertyImage.Property)
+                .HasForeignKey(propertyImage => propertyImage.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
