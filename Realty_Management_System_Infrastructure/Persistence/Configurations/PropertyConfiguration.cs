@@ -13,7 +13,7 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.Property(property => property.Slug)
                 .IsRequired()
                 .HasMaxLength(50);
-            
+
             builder.Property(property => property.Description)
                 .IsRequired(false)
                 .HasMaxLength(100);
@@ -83,6 +83,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.HasMany(property => property.PropertyImages)
                 .WithOne(propertyImage => propertyImage.Property)
                 .HasForeignKey(propertyImage => propertyImage.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PriceUnit
+            * Each Property has exactly one PriceUnit
+            * One PriceUnit can be used by many Properties.
+            */
+            builder.HasOne(property => property.PriceUnit)
+                .WithMany(priceUnit => priceUnit.Properties)
+                .HasForeignKey(property => property.PriceUnitId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
