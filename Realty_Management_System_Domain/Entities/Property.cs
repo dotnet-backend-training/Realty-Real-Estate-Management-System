@@ -18,8 +18,9 @@
         public City City { get; set; } = default!;
         public Guid ZoneId { get; set; }
         public Zone Zone { get; set; } = default!;
-        public ICollection<PropertyImage> PropertyImages { get; set; } = new HashSet<PropertyImage>();
         public Guid PriceUnitId { get; set; }
         public PriceUnit PriceUnit { get; set; } = default!;
+        public ICollection<PropertyImage> PropertyImages { get; set; } = new HashSet<PropertyImage>();
+        public ICollection<PropertyCategoryAssociation> PropertyCategoryAssociations { get; set; } = new HashSet<PropertyCategoryAssociation>();
     }
 }

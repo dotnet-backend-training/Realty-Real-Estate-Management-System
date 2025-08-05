@@ -94,6 +94,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(priceUnit => priceUnit.Properties)
                 .HasForeignKey(property => property.PriceUnitId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyCategoryAssociation
+            * One Property has many PropertyCategoryAssociation records.
+            * One PropertyCategoryAssociation belongs to one Property.
+            */
+            builder.HasMany(property => property.PropertyCategoryAssociations)
+                .WithOne(propertyCategoryAssociation => propertyCategoryAssociation.Property)
+                .HasForeignKey(propertyCategoryAssociation => propertyCategoryAssociation.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
