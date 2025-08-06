@@ -124,6 +124,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(propertyFeatureAssociation => propertyFeatureAssociation.Property)
                 .HasForeignKey(propertyFeatureAssociation => propertyFeatureAssociation.PropertyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> NearbyPlace
+            * Property has many NearbyPlaces
+            * NearbyPlace belongs to one Property
+            */
+            builder.HasMany(property => property.NearbyPlaces)
+                .WithOne(nearbyPlace => nearbyPlace.Property)
+                .HasForeignKey(nearbyPlace => nearbyPlace.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

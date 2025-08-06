@@ -25,5 +25,6 @@
         public Guid OwnerId { get; set; }
         public User Owner { get; set; } = default!;
         public ICollection<PropertyFeatureAssociation> PropertyFeatureAssociations { get; set; } = new HashSet<PropertyFeatureAssociation>();
+        public ICollection<NearbyPlace> NearbyPlaces { get; set; } = new HashSet<NearbyPlace>();
     }
 }
