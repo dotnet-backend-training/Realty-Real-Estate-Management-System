@@ -24,5 +24,6 @@
         public ICollection<PropertyCategoryAssociation> PropertyCategoryAssociations { get; set; } = new HashSet<PropertyCategoryAssociation>();
         public Guid OwnerId { get; set; }
         public User Owner { get; set; } = default!;
+        public ICollection<PropertyFeatureAssociation> PropertyFeatureAssociations { get; set; } = new HashSet<PropertyFeatureAssociation>();
     }
 }

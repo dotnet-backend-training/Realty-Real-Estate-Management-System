@@ -114,6 +114,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(owner => owner.Properties)
                 .HasForeignKey(property => property.OwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyFeatureAssociation
+            * A Property has many PropertyFeatureAssociation
+            * A PropertyFeatureAssociation belongs to one Property.
+            */
+            builder.HasMany(property => property.PropertyFeatureAssociations)
+                .WithOne(propertyFeatureAssociation => propertyFeatureAssociation.Property)
+                .HasForeignKey(propertyFeatureAssociation => propertyFeatureAssociation.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
