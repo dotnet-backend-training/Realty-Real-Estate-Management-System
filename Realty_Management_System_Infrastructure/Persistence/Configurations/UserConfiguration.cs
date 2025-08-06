@@ -11,7 +11,7 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.Property(user => user.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
-            
+
             builder.Property(user => user.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -19,7 +19,7 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.Property(user => user.Email)
                 .IsRequired();
 
-            builder.Property(user  => user.UserName)
+            builder.Property(user => user.UserName)
                 .IsRequired();
 
             /*
@@ -28,7 +28,7 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             * A Country can have many Users
             */
             builder.HasOne(user => user.Country)
-                .WithMany(country  => country.Users)
+                .WithMany(country => country.Users)
                 .HasForeignKey(user => user.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -50,6 +50,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.HasOne(user => user.Zone)
                 .WithMany(zone => zone.Users)
                 .HasForeignKey(user => user.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * User -> Property
+            * One user can own many properties
+            * Each Property is owned by one user 
+            */
+            builder.HasMany(user => user.Properties)
+                .WithOne(property => property.Owner)
+                .HasForeignKey(property => property.OwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

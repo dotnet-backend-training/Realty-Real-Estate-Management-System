@@ -22,5 +22,7 @@
         public PriceUnit PriceUnit { get; set; } = default!;
         public ICollection<PropertyImage> PropertyImages { get; set; } = new HashSet<PropertyImage>();
         public ICollection<PropertyCategoryAssociation> PropertyCategoryAssociations { get; set; } = new HashSet<PropertyCategoryAssociation>();
+        public Guid OwnerId { get; set; }
+        public User Owner { get; set; } = default!;
     }
 }
