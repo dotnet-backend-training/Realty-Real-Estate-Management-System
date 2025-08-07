@@ -61,6 +61,26 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(property => property.Owner)
                 .HasForeignKey(property => property.OwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * User -> Contract
+            * One User can own many Contract
+            * Each Contract is owned by one user 
+            */
+            builder.HasMany(user => user.OwnedContracts)
+                .WithOne(contract => contract.Owner)
+                .HasForeignKey(contract => contract.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * User -> Contract
+            * One User can own many CustomerContract
+            * Each CustomerContract is owned by one User 
+            */
+            builder.HasMany(user => user.CustomerContracts)
+                .WithOne(contract => contract.Customer)
+                .HasForeignKey(contract => contract.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

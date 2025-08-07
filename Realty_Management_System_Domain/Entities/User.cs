@@ -15,5 +15,7 @@ namespace Realty_Management_System_Domain.Entities
         public Guid ZoneId { get; set; }
         public Zone Zone { get; set; } = default!;
         public ICollection<Property> Properties { get; set; } = new HashSet<Property>();
+        public ICollection<Contract> OwnedContracts { get; set; } = new HashSet<Contract>();
+        public ICollection<Contract> CustomerContracts { get; set; } = new HashSet<Contract>();
     }
 }
