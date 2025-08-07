@@ -17,6 +17,12 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                     }
             );
 
+            builder.Property(contract => contract.StartDate)
+                .IsRequired();
+
+            builder.Property(contract => contract.EndDate)
+                .IsRequired();
+
             /*
             * Contract -> Property
             * Contract belongs to one Property
@@ -55,6 +61,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.HasOne(contract => contract.Customer)
                 .WithMany(user => user.CustomerContracts)
                 .HasForeignKey(contract => contract.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Contract -> PaymentFrequency
+            * One Contract has one PaymentFrequency
+            * One PaymentFrequency can be used by many Contracts
+            */
+            builder.HasOne(contract => contract.PaymentFrequency)
+                .WithMany(paymentFrequency => paymentFrequency.Contracts)
+                .HasForeignKey(contract => contract.PaymentFrequencyId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
