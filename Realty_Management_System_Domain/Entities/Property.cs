@@ -20,12 +20,13 @@
         public Zone Zone { get; set; } = default!;
         public Guid PriceUnitId { get; set; }
         public PriceUnit PriceUnit { get; set; } = default!;
-        public ICollection<PropertyImage> PropertyImages { get; set; } = new HashSet<PropertyImage>();
-        public ICollection<PropertyCategoryAssociation> PropertyCategoryAssociations { get; set; } = new HashSet<PropertyCategoryAssociation>();
         public Guid OwnerId { get; set; }
         public User Owner { get; set; } = default!;
+        public ICollection<PropertyImage> PropertyImages { get; set; } = new HashSet<PropertyImage>();
+        public ICollection<PropertyCategoryAssociation> PropertyCategoryAssociations { get; set; } = new HashSet<PropertyCategoryAssociation>();
         public ICollection<PropertyFeatureAssociation> PropertyFeatureAssociations { get; set; } = new HashSet<PropertyFeatureAssociation>();
         public ICollection<NearbyPlace> NearbyPlaces { get; set; } = new HashSet<NearbyPlace>();
         public ICollection<PropertyAmenity> PropertyAmenities { get; set; } = new HashSet<PropertyAmenity>();
+        public ICollection<Contract> Contracts { get; set; } = new HashSet<Contract>();
     }
 }

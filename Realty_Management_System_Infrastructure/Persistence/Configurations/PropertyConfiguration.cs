@@ -144,6 +144,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(propertyAmenity => propertyAmenity.Property)
                 .HasForeignKey(propertyAmenity => propertyAmenity.PropertyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> Contract
+            * Property has many Contracts
+            * Contract belongs to one Property
+            */
+            builder.HasMany(property => property.Contracts)
+                .WithOne(contract => contract.Property)
+                .HasForeignKey(contract => contract.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
