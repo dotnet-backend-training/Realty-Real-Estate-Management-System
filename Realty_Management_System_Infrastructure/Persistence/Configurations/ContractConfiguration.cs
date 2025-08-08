@@ -12,8 +12,11 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 contract =>
                     new
                     {
+                        contract.OwnerId,
+                        contract.CustomerId,
                         contract.PropertyId,
-                        contract.ContractTypeId
+                        contract.ContractTypeId,
+                        contract.StartDate,
                     }
             );
 
@@ -71,6 +74,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
             builder.HasOne(contract => contract.PaymentFrequency)
                 .WithMany(paymentFrequency => paymentFrequency.Contracts)
                 .HasForeignKey(contract => contract.PaymentFrequencyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Contract -> Invoice 
+            * One Contract can have many Invoices
+            * One Invoice belongs to one Contract
+            */
+            builder.HasMany(contract => contract.Invoices)
+                .WithOne(invoice => invoice.Contract)
+                .HasForeignKey(invoice => invoice.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

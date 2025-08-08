@@ -15,5 +15,6 @@
         public ContractType ContractType { get; set; } = default!;
         public Guid PaymentFrequencyId { get; set; }
         public PaymentFrequency PaymentFrequency { get; set; } = default!;
+        public ICollection<Invoice> Invoices { get; set; } = new HashSet<Invoice>();
     }
 }
