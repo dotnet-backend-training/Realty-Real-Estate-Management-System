@@ -37,6 +37,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(contract => contract.Invoices)
                 .HasForeignKey(invoice => invoice.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Invoice -> Transaction
+            * One Invoice is used in many Transactions,
+            * one Transaction uses one Invoice.
+            */
+            builder.HasMany(invoice => invoice.Transactions)
+                .WithOne(transaction => transaction.Invoice)
+                .HasForeignKey(transaction => transaction.InvoiceId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -9,5 +9,6 @@
         public Contract Contract { get; set; } = default!;
         public Guid InvoiceStatusId { get; set; }
         public InvoiceStatus InvoiceStatus { get; set; } = default!;
+        public ICollection<Transaction> Transactions { get; set; } = new HashSet<Transaction>();
     }
 }
