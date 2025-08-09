@@ -19,5 +19,6 @@ namespace Realty_Management_System_Domain.Entities
         public ICollection<Contract> OwnedContracts { get; set; } = new HashSet<Contract>();
         public ICollection<Contract> CustomerContracts { get; set; } = new HashSet<Contract>();
         public ICollection<PropertyTourRequest> PropertyTourRequests { get; set; } = new HashSet<PropertyTourRequest>();
+        public ICollection<PropertyReview> PropertyReviews { get; set; } = new HashSet<PropertyReview>();
     }
 }

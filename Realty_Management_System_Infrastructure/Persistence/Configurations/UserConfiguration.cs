@@ -91,6 +91,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(propertyTourRequest => propertyTourRequest.User)
                 .HasForeignKey(propertyTourRequest => propertyTourRequest.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * User -> PropertyReview 
+            * User can write many PropertyReview
+            * PropertyReview belongs to one User
+            */
+            builder.HasMany(user => user.PropertyReviews)
+                .WithOne(propertyReview => propertyReview.User)
+                .HasForeignKey(propertyReview => propertyReview.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
