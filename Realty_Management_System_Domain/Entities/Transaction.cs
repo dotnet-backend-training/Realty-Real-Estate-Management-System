@@ -8,5 +8,7 @@
         public Invoice Invoice { get; set; } = default!;
         public Guid PaymentMethodId { get; set; }
         public PaymentMethod PaymentMethod { get; set; } = default!;
+        public Guid TransactionStatusId { get; set; }
+        public TransactionStatus TransactionStatus { get; set; } = default!;
     }
 }
