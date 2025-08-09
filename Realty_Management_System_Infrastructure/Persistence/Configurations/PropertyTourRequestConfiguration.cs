@@ -32,6 +32,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(property => property.PropertyTourRequests)
                 .HasForeignKey(propertyTourRequest => propertyTourRequest.PropertyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * PropertyTourRequest -> User 
+            * Each PropertyTourRequest belongs to one User 
+            * One User can request many PropertyTourRequest
+            */
+            builder.HasOne(propertyTourRequest => propertyTourRequest.User)
+                .WithMany(user => user.PropertyTourRequests)
+                .HasForeignKey(propertyTourRequest => propertyTourRequest.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
