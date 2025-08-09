@@ -28,5 +28,6 @@
         public ICollection<NearbyPlace> NearbyPlaces { get; set; } = new HashSet<NearbyPlace>();
         public ICollection<PropertyAmenity> PropertyAmenities { get; set; } = new HashSet<PropertyAmenity>();
         public ICollection<Contract> Contracts { get; set; } = new HashSet<Contract>();
+        public ICollection<PropertyTourRequest> PropertyTourRequests { get; set; } = new HashSet<PropertyTourRequest>();
     }
 }
