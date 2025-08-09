@@ -164,6 +164,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(propertyTourRequest => propertyTourRequest.Property)
                 .HasForeignKey(propertyTourRequest => propertyTourRequest.PropertyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyReview
+            * Property has many PropertyReview
+            * PropertyReview belongs to one Property
+            */
+            builder.HasMany(property => property.PropertyReviews)
+                .WithOne(propertyReview => propertyReview.Property)
+                .HasForeignKey(propertyReview => propertyReview.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

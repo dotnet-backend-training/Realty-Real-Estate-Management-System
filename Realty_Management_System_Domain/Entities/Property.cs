@@ -29,5 +29,6 @@
         public ICollection<PropertyAmenity> PropertyAmenities { get; set; } = new HashSet<PropertyAmenity>();
         public ICollection<Contract> Contracts { get; set; } = new HashSet<Contract>();
         public ICollection<PropertyTourRequest> PropertyTourRequests { get; set; } = new HashSet<PropertyTourRequest>();
+        public ICollection<PropertyReview> PropertyReviews { get; set; } = new HashSet<PropertyReview>();
     }
 }
