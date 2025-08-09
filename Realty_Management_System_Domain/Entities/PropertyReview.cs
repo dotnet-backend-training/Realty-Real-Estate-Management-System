@@ -10,5 +10,7 @@
         public User User { get; set; } = default!;
         public Guid ContractId { get; set; }
         public Contract Contract { get; set; } = default!;
+        public Guid TransactionId { get; set; }
+        public Transaction Transaction { get; set; } = default!;
     }
 }

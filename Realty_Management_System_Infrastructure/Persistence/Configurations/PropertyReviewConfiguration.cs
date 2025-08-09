@@ -47,6 +47,16 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(contract => contract.PropertyReview)
                 .HasForeignKey<PropertyReview>(propertyReview => propertyReview.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * PropertyReview -> Transaction
+            * Each PropertyReview is linked to exactly one Transaction.
+            * One Transaction can have zero or one PropertyReview.
+            */
+            builder.HasOne(propertyReview => propertyReview.Transaction)
+                .WithOne(transaction => transaction.PropertyReview)
+                .HasForeignKey<PropertyReview>(propertyReview => propertyReview.TransactionId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

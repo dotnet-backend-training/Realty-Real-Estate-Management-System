@@ -10,5 +10,7 @@
         public PaymentMethod PaymentMethod { get; set; } = default!;
         public Guid TransactionStatusId { get; set; }
         public TransactionStatus TransactionStatus { get; set; } = default!;
+        public Guid? PropertyReviewId { get; set; }
+        public PropertyReview? PropertyReview { get; set; } = default!;
     }
 }
