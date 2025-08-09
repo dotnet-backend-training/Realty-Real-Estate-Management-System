@@ -16,5 +16,7 @@
         public Guid PaymentFrequencyId { get; set; }
         public PaymentFrequency PaymentFrequency { get; set; } = default!;
         public ICollection<Invoice> Invoices { get; set; } = new HashSet<Invoice>();
+        public Guid PropertyReviewId { get; set; }
+        public PropertyReview PropertyReview = default!;
     }
 }

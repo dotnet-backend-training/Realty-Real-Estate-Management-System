@@ -8,5 +8,7 @@
         public Property Property { get; set; } = default!;
         public Guid UserId { get; set; }
         public User User { get; set; } = default!;
+        public Guid ContractId { get; set; }
+        public Contract Contract { get; set; } = default!;
     }
 }
