@@ -8,6 +8,13 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
+
+            builder.HasKey(transaction => transaction.Id);
+
+            builder.Property(transaction => transaction.AmountPaid)
+                .IsRequired()
+                .HasPrecision(18, 2);
+
             /*
              * Transaction -> PaymentMethod 
              * one Transaction uses one PaymentMethod.

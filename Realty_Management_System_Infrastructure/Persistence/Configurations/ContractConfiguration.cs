@@ -12,11 +12,7 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 contract =>
                     new
                     {
-                        contract.OwnerId,
-                        contract.CustomerId,
-                        contract.PropertyId,
-                        contract.ContractTypeId,
-                        contract.StartDate,
+                        contract.Id,
                     }
             );
 
@@ -25,6 +21,10 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
 
             builder.Property(contract => contract.EndDate)
                 .IsRequired();
+
+            builder.Property(contract => contract.TotalAmount)
+                .IsRequired()
+                .HasPrecision(18, 2);
 
             /*
             * Contract -> Property

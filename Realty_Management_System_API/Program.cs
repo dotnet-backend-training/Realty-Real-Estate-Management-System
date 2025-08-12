@@ -1,9 +1,12 @@
-
 using Microsoft.AspNetCore.Identity;
-using Realty_Management_System_Api.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Infrastructure.Constants;
+using Realty_Management_System_Infrastructure.Data.Contexts;
+using Realty_Management_System_Infrastructure.Exceptions;
 
-namespace Realty_Real_Estate_Management_System
+namespace Realty_Management_System_API
 {
     public class Program
     {
@@ -19,7 +22,33 @@ namespace Realty_Real_Estate_Management_System
             builder.Services.AddSwaggerGen();
 
             // Infrastructure services layer
-            builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            // Identity configuration
+            builder.Services.AddIdentity<User, IdentityRole<Guid>>(
+                options =>
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequiredUniqueChars = 0;
+                }
+            ).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // ApplicationDbContext configuration
+            builder.Services.AddDbContext<ApplicationDbContext>(
+                options =>
+                {
+                    string? connectionString = builder.Configuration.GetConnectionString(
+                     AppSettingsConstants.AppSettingsKeys.ConnectionStrings.DefaultConnection
+                    );
+                    if (connectionString.IsNullOrEmpty())
+                    {
+                        throw AppSettingException.ConnectionStrings.DefaultConnectionStringNotFound;
+                    }
+                    options.UseSqlServer(connectionString);
+                }
+            );
 
 
             var app = builder.Build();

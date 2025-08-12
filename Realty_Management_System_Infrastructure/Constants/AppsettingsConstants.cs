@@ -6,7 +6,7 @@
         {
             public static class ConnectionStrings
             {
-                public const string DefaultConnection = "ConnectionStrings: DefaultConnection";
+                public const string DefaultConnection = "DefaultConnection";
             }
         }
     }

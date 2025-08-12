@@ -2,7 +2,7 @@
 
 namespace Realty_Management_System_Domain.Entities
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<Guid>
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
