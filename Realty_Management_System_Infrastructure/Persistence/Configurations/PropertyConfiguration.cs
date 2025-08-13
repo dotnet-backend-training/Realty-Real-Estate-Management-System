@@ -1,0 +1,179 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Realty_Management_System_Domain.Entities;
+
+namespace Realty_Management_System_Infrastructure.Persistence.Configurations
+{
+    public class PropertyConfiguration : IEntityTypeConfiguration<Property>
+    {
+        public void Configure(EntityTypeBuilder<Property> builder)
+        {
+            builder.HasKey(property => property.Id);
+
+            builder.Property(property => property.Slug)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(property => property.Description)
+                .IsRequired(false)
+                .HasMaxLength(100);
+
+            builder.Property(property => property.NumberOfBathrooms)
+                .IsRequired(false);
+
+            builder.Property(property => property.NumberOfFloors)
+                .IsRequired(false);
+
+            builder.Property(property => property.NumberOfBedrooms)
+                .IsRequired(false);
+
+            builder.Property(property => property.NumberOfGarage)
+                .IsRequired(false);
+
+            builder.Property(property => property.Price)
+                .IsRequired()
+                .HasPrecision(18, 2);
+
+            builder.Property(property => property.YearBuilt)
+                .IsRequired(false);
+
+            /*
+            * Property -> PropertyStatus
+            * Each property has one PropertyStatus.
+            * Each PropertyStatus can be assigned to many Properties.
+            */
+            builder.HasOne(property => property.PropertyStatus)
+                .WithMany(propertyStatus => propertyStatus.Properties)
+                .HasForeignKey(property => property.PropertyStatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+            /*
+            * Property -> Country
+            * Each property belongs to one Country .
+            * Each Country has many Properties
+            */
+            builder.HasOne(property => property.Country)
+                .WithMany(country => country.Properties)
+                .HasForeignKey(property => property.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+            /*
+            * Property -> City
+            * Each property belongs to one City.
+            * Each City has many Properties
+            */
+            builder.HasOne(property => property.City)
+                .WithMany(city => city.Properties)
+                .HasForeignKey(property => property.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> Zone
+            * Each property belongs to one Zone.
+            * Each Zone has many Properties
+            */
+            builder.HasOne(property => property.Zone)
+                .WithMany(zone => zone.Properties)
+                .HasForeignKey(property => property.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyImage
+            * One Property has many PropertyImages
+            * Each PropertyImage belongs to one Property 
+            */
+            builder.HasMany(property => property.PropertyImages)
+                .WithOne(propertyImage => propertyImage.Property)
+                .HasForeignKey(propertyImage => propertyImage.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PriceUnit
+            * Each Property has exactly one PriceUnit
+            * One PriceUnit can be used by many Properties.
+            */
+            builder.HasOne(property => property.PriceUnit)
+                .WithMany(priceUnit => priceUnit.Properties)
+                .HasForeignKey(property => property.PriceUnitId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyCategoryAssociation
+            * One Property has many PropertyCategoryAssociation records.
+            * One PropertyCategoryAssociation belongs to one Property.
+            */
+            builder.HasMany(property => property.PropertyCategoryAssociations)
+                .WithOne(propertyCategoryAssociation => propertyCategoryAssociation.Property)
+                .HasForeignKey(propertyCategoryAssociation => propertyCategoryAssociation.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> User
+            * Each property is owned by one user 
+            * One user can own many properties
+            */
+            builder.HasOne(property => property.Owner)
+                .WithMany(owner => owner.Properties)
+                .HasForeignKey(property => property.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyFeatureAssociation
+            * A Property has many PropertyFeatureAssociation
+            * A PropertyFeatureAssociation belongs to one Property.
+            */
+            builder.HasMany(property => property.PropertyFeatureAssociations)
+                .WithOne(propertyFeatureAssociation => propertyFeatureAssociation.Property)
+                .HasForeignKey(propertyFeatureAssociation => propertyFeatureAssociation.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> NearbyPlace
+            * Property has many NearbyPlaces
+            * NearbyPlace belongs to one Property
+            */
+            builder.HasMany(property => property.NearbyPlaces)
+                .WithOne(nearbyPlace => nearbyPlace.Property)
+                .HasForeignKey(nearbyPlace => nearbyPlace.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyAmenity
+            * Property has many PropertyAmenities.
+            * PropertyAmenity belongs to one Property.
+            */
+            builder.HasMany(property => property.PropertyAmenities)
+                .WithOne(propertyAmenity => propertyAmenity.Property)
+                .HasForeignKey(propertyAmenity => propertyAmenity.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> Contract
+            * Property has many Contracts
+            * Contract belongs to one Property
+            */
+            builder.HasMany(property => property.Contracts)
+                .WithOne(contract => contract.Property)
+                .HasForeignKey(contract => contract.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyTourRequest
+            * Property receives many PropertyTourRequests
+            * PropertyTourRequest belongs to one Property
+            */
+            builder.HasMany(property => property.PropertyTourRequests)
+                .WithOne(propertyTourRequest => propertyTourRequest.Property)
+                .HasForeignKey(propertyTourRequest => propertyTourRequest.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            /*
+            * Property -> PropertyReview
+            * Property has many PropertyReview
+            * PropertyReview belongs to one Property
+            */
+            builder.HasMany(property => property.PropertyReviews)
+                .WithOne(propertyReview => propertyReview.Property)
+                .HasForeignKey(propertyReview => propertyReview.PropertyId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+    }
+}
