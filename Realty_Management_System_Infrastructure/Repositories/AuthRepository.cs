@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Domain.Enums;
 using Realty_Management_System_Domain.Repositories;
 using Realty_Management_System_Infrastructure.Data.Contexts;
 
@@ -8,42 +10,39 @@ namespace Realty_Management_System_Infrastructure.Repositories
     public class AuthRepository : IAuthRepository
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManger;
+        private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
+        private readonly SignInManager<User> _signInManager;
 
         public AuthRepository(
             ApplicationDbContext applicationDbContext,
-            UserManager<User> userManager,
+            IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
             SignInManager<User> signInManger
         )
         {
             _applicationDbContext = applicationDbContext;
-            _userManager = userManager;
-            _signInManger = signInManger;
+            _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
+            _signInManager = signInManger;
         }
 
-        public async Task<User?> FindUserByEmailAsync(string email)
+        // TOOD: move it later to a separate unit.
+        public async Task<User?> FindUserAsync(string identifier, UserIdentifierType identifierType)
         {
-            return await _userManager.FindByEmailAsync(email);
+            var strategy = _userIdentifierStrategyFactory.GetStrategy(identifierType);
+            return await strategy.FindUserAsync(identifier);
         }
 
-        public async Task<User?> FindUserByUsernameAsync(string username)
-        {
-            return await _userManager.FindByNameAsync(username);
-        }
-
-        public async Task<User?> LoginAsync(
+        public async Task<SignInResult> LoginAsync(
             User user,
             string password
         )
         {
-            var signInResult = await _signInManger.PasswordSignInAsync(
+            SignInResult signInResult = await _signInManager.PasswordSignInAsync(
                 user,
                 password,
                 isPersistent: false,
                 lockoutOnFailure: false
             );
-            return signInResult.Succeeded ? user : null;
+            return signInResult;
         }
     }
 }
