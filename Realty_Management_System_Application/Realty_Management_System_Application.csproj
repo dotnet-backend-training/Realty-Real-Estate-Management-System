@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTO%27s\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
