@@ -1,10 +1,17 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Realty_Management_System_Application.Interfaces;
+using Realty_Management_System_Application.Services;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Domain.Repositories;
 using Realty_Management_System_Infrastructure.Constants;
 using Realty_Management_System_Infrastructure.Data.Contexts;
 using Realty_Management_System_Infrastructure.Exceptions;
+using Realty_Management_System_Infrastructure.Repositories;
+using Realty_Management_System_Infrastructure.Strategies.UserIdentifier;
+using System.Reflection;
 
 namespace Realty_Management_System_API
 {
@@ -50,6 +57,13 @@ namespace Realty_Management_System_API
                 }
             );
 
+            // Application services layer
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+            builder.Services.AddScoped<IUserIdentifierStrategyFactory, UserIdentifierStrategyFactory>();
+            builder.Services.AddScoped<IUserIdentifierStrategy, EmailIdentifierStrategy>();
+            builder.Services.AddScoped<IUserIdentifierStrategy, UsernameIdentifierStrategy>();
+            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             var app = builder.Build();
 

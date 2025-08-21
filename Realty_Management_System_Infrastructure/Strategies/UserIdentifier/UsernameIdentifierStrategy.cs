@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Domain.Enums;
 
 namespace Realty_Management_System_Infrastructure.Strategies.UserIdentifier
 {
     public class UsernameIdentifierStrategy : IUserIdentifierStrategy
     {
         private readonly UserManager<User> _userManager;
+        public UserIdentifierType Type => UserIdentifierType.Username;
 
         public UsernameIdentifierStrategy(UserManager<User> userManager)
         {

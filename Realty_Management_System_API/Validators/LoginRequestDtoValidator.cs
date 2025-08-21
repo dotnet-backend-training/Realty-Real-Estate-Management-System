@@ -3,7 +3,7 @@ using Realty_Management_System_Application.DTO_s.Auth;
 using Realty_Management_System_Application.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace Realty_Management_System_Application.Validators
+namespace Realty_Management_System_API.Validators
 {
     public class LoginRequestDtoValidator : AbstractValidator<LoginRequestDto>
     {

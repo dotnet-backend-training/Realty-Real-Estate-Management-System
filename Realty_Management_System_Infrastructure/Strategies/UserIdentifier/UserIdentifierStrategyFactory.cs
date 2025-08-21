@@ -5,26 +5,22 @@ namespace Realty_Management_System_Infrastructure.Strategies.UserIdentifier
 {
     public class UserIdentifierStrategyFactory : IUserIdentifierStrategyFactory
     {
-        private readonly UsernameIdentifierStrategy _usernameIdentifierStrategy;
-        private readonly EmailIdentifierStrategy _emailIdentifierStrategy;
+        private readonly IEnumerable<IUserIdentifierStrategy> _userIdentifierStrategies;
 
         public UserIdentifierStrategyFactory(
-            UsernameIdentifierStrategy usernameIdentifierStrategy,
-            EmailIdentifierStrategy emailIdentifierStrategy
+            IEnumerable<IUserIdentifierStrategy> userIdentifierStrategies
         )
         {
-            _usernameIdentifierStrategy = usernameIdentifierStrategy;
-            _emailIdentifierStrategy = emailIdentifierStrategy;
+            _userIdentifierStrategies = userIdentifierStrategies;
         }
-
         public IUserIdentifierStrategy GetStrategy(UserIdentifierType userIdentifierType)
         {
-            return userIdentifierType switch
-            {
-                UserIdentifierType.Email => _emailIdentifierStrategy,
-                UserIdentifierType.Username => _usernameIdentifierStrategy,
-                _ => throw new NotSupportedException($"No strategy defined for {userIdentifierType}")
-            };
+            var strategy = _userIdentifierStrategies.FirstOrDefault(
+                userIdentifierStrategy => userIdentifierStrategy.Type == userIdentifierType
+            );
+            return strategy is null ?
+                throw new NotSupportedException($"No strategy defined for {userIdentifierType}")
+                : strategy;
         }
     }
 }
