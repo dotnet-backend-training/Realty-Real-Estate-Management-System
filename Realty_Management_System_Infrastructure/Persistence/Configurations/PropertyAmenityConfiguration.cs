@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Infrastructure.Data.DataSeed;
 
 namespace Realty_Management_System_Infrastructure.Persistence.Configurations
 {
@@ -35,6 +36,8 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithMany(amenity => amenity.PropertyAmenities)
                 .HasForeignKey(propertyAmenity => propertyAmenity.AmenityId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(PropertyAmenitySeedData.GetPropertyAmenities());
         }
     }
 }

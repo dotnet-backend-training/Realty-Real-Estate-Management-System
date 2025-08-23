@@ -58,16 +58,6 @@ namespace Realty_Management_System_Infrastructure.Data.DataSeed
                     Latitude = 32.2400m,
                     Longitude = 35.2700m
                 },
-                new Zone
-                {
-                    Id = SeedIds.Zone6,
-                    Name = "Jabal Al Mukaber",
-                    CityId = SeedIds.City1,
-                    CountryId = SeedIds.Country1,
-                    PostalCode = "NBL-006",
-                    Latitude = 32.2150m,
-                    Longitude = 35.2480m
-                }
             ];
         }
     }

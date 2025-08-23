@@ -33,11 +33,6 @@ namespace Realty_Management_System_Infrastructure.Data.DataSeed
                     Id = SeedIds.Amenity5,
                     Name = "Garden"
                 },
-                new Amenity
-                {
-                    Id = SeedIds.Amenity6,
-                    Name = "Security"
-                }
             ];
         }
     }

@@ -48,14 +48,6 @@ namespace Realty_Management_System_Infrastructure.Data.DataSeed
                     Longitude = 35.2936m,
                     CountryId = SeedIds.Country1
                 },
-                new City
-                {
-                    Id = SeedIds.City6,
-                    Name = "Tulkarm",
-                    Latitude = 32.3106m,
-                    Longitude = 35.0473m,
-                    CountryId = SeedIds.Country1
-                }
             ];
         }
     }
