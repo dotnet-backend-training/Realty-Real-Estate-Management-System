@@ -1,9 +1,9 @@
 ﻿using Realty_Management_System_Application.DTO_s.Auth;
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
-using Realty_Management_System_Application.Shared;
 using Realty_Management_System_Application.Shared.Result;
 using Realty_Management_System_Domain.Repositories;
+using System.Net;
 
 namespace Realty_Management_System_Application.Services
 {
@@ -27,8 +27,8 @@ namespace Realty_Management_System_Application.Services
             );
             if (foundUser is null)
             {
-                return FailResult.Create(
-                    code: ErrorCode.UserNotFound,
+                return FailureResult.Create(
+                    statusCode: (int)HttpStatusCode.NotFound,
                     message: "Failed to login.",
                     error: "User not found."
                 );
@@ -39,14 +39,14 @@ namespace Realty_Management_System_Application.Services
             );
             if (!loginResult.Succeeded)
             {
-                return FailResult.Create(
-                    code: ErrorCode.LoginFailed,
+                return FailureResult.Create(
+                    statusCode: (int)HttpStatusCode.BadRequest,
                     message: "Login failed",
                     error: "Invalid credentials, please try again."
                 );
             }
             return SuccessResult.Create(
-                successCode: SuccessCode.SuccessfulLogin,
+                statusCode: (int)HttpStatusCode.OK,
                 message: "Login successful"
             );
         }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Realty_Management_System_Application.DTO_s.Auth;
 using Realty_Management_System_Application.Interfaces;
+using Realty_Management_System_Application.Shared.Result;
 
 namespace Realty_Management_System_API.Controllers
 {
@@ -36,8 +37,27 @@ namespace Realty_Management_System_API.Controllers
                 );
                 return ValidationProblem(modelState);
             }
-            var result = await _authService.LoginAsync(loginRequestDto);
-            return Ok(result);
+            var loginResult = await _authService.LoginAsync(loginRequestDto);
+            if (loginResult is FailureResult loginFailureResult)
+            {
+                return Problem(
+                    statusCode: loginFailureResult.StatusCode,
+                    title: loginFailureResult.Message,
+                    detail: string.Join(", ", loginFailureResult.Errors)
+                );
+            }
+            else if (loginResult is SuccessResult loginSuccessResult)
+            {
+                return Ok(loginSuccessResult);
+            }
+            else
+            {
+                return Problem(
+                    statusCode: 500,
+                    title: "Unknown result type",
+                    detail: "The login operation returned an unexpected result."
+                );
+            }
         }
     }
 }
