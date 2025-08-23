@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Realty_Management_System_Domain.Entities;
-using System.Diagnostics.Metrics;
+using Realty_Management_System_Infrastructure.Data.DataSeed;
 
 namespace Realty_Management_System_Infrastructure.Persistence.Configurations
 {
@@ -47,6 +47,8 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                .WithOne(property => property.Country)
                .HasForeignKey(property => property.CountryId)
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(CountrySeedData.GetCountries());
         }
     }
 }
