@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Domain.Entities;
-using Realty_Management_System_Domain.Enums;
 using Realty_Management_System_Domain.Repositories;
 using Realty_Management_System_Infrastructure.Data.Contexts;
 
@@ -9,26 +7,17 @@ namespace Realty_Management_System_Infrastructure.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-        private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
         private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
         public AuthRepository(
             ApplicationDbContext applicationDbContext,
-            IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
-            SignInManager<User> signInManger
+            SignInManager<User> signInManger,
+            UserManager<User> userManager
         )
         {
-            _applicationDbContext = applicationDbContext;
-            _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
             _signInManager = signInManger;
-        }
-
-        // TOOD: move it later to a separate unit.
-        public async Task<User?> FindUserAsync(string identifier, UserIdentifierType identifierType)
-        {
-            var strategy = _userIdentifierStrategyFactory.GetStrategy(identifierType);
-            return await strategy.FindUserAsync(identifier);
+            _userManager = userManager;
         }
 
         public async Task<SignInResult> LoginAsync(
@@ -43,6 +32,12 @@ namespace Realty_Management_System_Infrastructure.Repositories
                 lockoutOnFailure: false
             );
             return signInResult;
+        }
+
+        public async Task<IdentityResult> RegisterAsync(User user, string password)
+        {
+            IdentityResult registerResult = await _userManager.CreateAsync(user, password);
+            return registerResult;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Result;
+using Realty_Management_System_Domain.Interfaces;
 using Realty_Management_System_Domain.Repositories;
 using System.Net;
 
@@ -10,18 +11,22 @@ namespace Realty_Management_System_Application.Services
     public class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepository;
+        private readonly IUserRepository _userRepository;
 
         public AuthService(
-        IAuthRepository authRepository
+            IAuthRepository authRepository,
+            IUserRepository userRepository
         )
         {
             _authRepository = authRepository;
+            _userRepository = userRepository;
         }
+
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
         {
 
             var userIdentifier = UserIdentifierHelper.DetectIdentifierType(loginRequestDto.Identifier);
-            var foundUser = await _authRepository.FindUserAsync(
+            var foundUser = await _userRepository.FindUserAsync(
                 loginRequestDto.Identifier,
                 userIdentifier
             );
@@ -49,6 +54,11 @@ namespace Realty_Management_System_Application.Services
                 statusCode: (int)HttpStatusCode.OK,
                 message: "Login successful"
             );
+        }
+
+        public Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

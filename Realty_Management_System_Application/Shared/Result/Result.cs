@@ -16,8 +16,6 @@
 
     public record SuccessResult : Result
     {
-        public SuccessCode SuccessCode { get; }
-
         public SuccessResult(int statusCode, string message = "Success")
             : base(true, statusCode, message)
         {
