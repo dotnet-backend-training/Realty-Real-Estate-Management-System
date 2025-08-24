@@ -2,6 +2,7 @@
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Result;
+using Realty_Management_System_Domain.Enums;
 using Realty_Management_System_Domain.Interfaces;
 using Realty_Management_System_Domain.Repositories;
 using System.Net;
@@ -12,28 +13,30 @@ namespace Realty_Management_System_Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
 
         public AuthService(
             IAuthRepository authRepository,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IUserIdentifierStrategyFactory userIdentifierStrategyFactory
         )
         {
             _authRepository = authRepository;
             _userRepository = userRepository;
+            _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
         }
 
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
         {
-
-            var userIdentifier = UserIdentifierHelper.DetectIdentifierType(loginRequestDto.Identifier);
-            var foundUser = await _userRepository.FindUserAsync(
-                loginRequestDto.Identifier,
-                userIdentifier
+            UserIdentifierType userIdentifier = UserIdentifierHelper.DetectIdentifierType(loginRequestDto.Identifier);
+            var loginStrategy = _userIdentifierStrategyFactory.GetStrategy(userIdentifier);
+            var foundUser = await loginStrategy.FindUserAsync(
+                loginRequestDto.Identifier
             );
             if (foundUser is null)
             {
                 return FailureResult.Create(
-                    statusCode: (int)HttpStatusCode.NotFound,
+                    statusCode: (int)(HttpStatusCode.NotFound),
                     message: "Failed to login.",
                     error: "User not found."
                 );
@@ -45,7 +48,7 @@ namespace Realty_Management_System_Application.Services
             if (!loginResult.Succeeded)
             {
                 return FailureResult.Create(
-                    statusCode: (int)HttpStatusCode.BadRequest,
+                    statusCode: (int)(HttpStatusCode.BadRequest),
                     message: "Login failed",
                     error: "Invalid credentials, please try again."
                 );
@@ -56,9 +59,26 @@ namespace Realty_Management_System_Application.Services
             );
         }
 
-        public Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
+        public async Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
-            throw new NotImplementedException();
+            bool userNameExistence = await _userRepository.ExistsByUsernameAsync(registerRequestDto.UserName);
+            if (userNameExistence)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.Conflict),
+                    message: "Register failed",
+                    error: "Username or email may already be in use."
+                );
+            }
+            bool emailExistence = await _userRepository.ExistsByEmailAsync(registerRequestDto.Email);
+            if (emailExistence)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.Conflict),
+                    message: "Register failed",
+                    error: "Username or email may already be in use."
+                );
+            }
         }
     }
 }

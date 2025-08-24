@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Realty_Management_System_Application.Interfaces;
+﻿using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Enums;
+using Realty_Management_System_Domain.Interfaces;
 
 namespace Realty_Management_System_Infrastructure.Strategies.UserIdentifier
 {
     public class UsernameIdentifierStrategy : IUserIdentifierStrategy
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IUserRepository _userRepository;
         public UserIdentifierType Type => UserIdentifierType.Username;
 
-        public UsernameIdentifierStrategy(UserManager<User> userManager)
+        public UsernameIdentifierStrategy(IUserRepository userRepository)
         {
-            _userManager = userManager;
+            _userRepository = userRepository;
         }
         public async Task<User?> FindUserAsync(string identifier)
         {
-            return await _userManager.FindByNameAsync(identifier);
+            return await _userRepository.FindByUsernameAsync(identifier);
         }
     }
 }
