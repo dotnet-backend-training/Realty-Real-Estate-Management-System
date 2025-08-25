@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Services;
+using Realty_Management_System_Application.Validators;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Interfaces;
 using Realty_Management_System_Domain.Interfaces.Location;
@@ -73,6 +74,7 @@ namespace Realty_Management_System_API
             builder.Services.AddScoped<IZoneRepository, ZoneRepository>();
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ILocationValidator, LocationValidator>();
 
             var app = builder.Build();
 
