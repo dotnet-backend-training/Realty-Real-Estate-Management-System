@@ -1,11 +1,11 @@
-﻿using Realty_Management_System_Application.Constants;
-using Realty_Management_System_Application.DTO_s.Auth;
+﻿using Mapster;
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Result;
+using Realty_Management_System_Domain.DTO_s.Auth;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Enums;
-using Realty_Management_System_Domain.Interfaces;
+using Realty_Management_System_Domain.MappingProfile;
 using Realty_Management_System_Domain.Repositories;
 using System.Net;
 
@@ -20,7 +20,6 @@ namespace Realty_Management_System_Application.Services
 
         public AuthService(
             IAuthRepository authRepository,
-            IUserRepository userRepository,
             IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
             ILocationValidator locationValidator,
             IUserValidator userValidator
@@ -67,7 +66,6 @@ namespace Realty_Management_System_Application.Services
 
         public async Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
-
             var userValidationResult = await _userValidator.ValidateAllAsync(
                 username: registerRequestDto.UserName,
                 email: registerRequestDto.Email
@@ -85,20 +83,10 @@ namespace Realty_Management_System_Application.Services
             {
                 return locationValidationResult;
             }
-            var useModel = new User()
-            {
-                Email = registerRequestDto.Email,
-                UserName = registerRequestDto.UserName,
-                FirstName = registerRequestDto.FirstName,
-                LastName = registerRequestDto.LastName,
-                ProfileImageUrl = registerRequestDto.ProfileImageUrl ?? DefaultImages.ProfileImageUrl,
-                CountryId = registerRequestDto.CountryId,
-                CityId = registerRequestDto.CityId,
-                ZoneId = registerRequestDto.ZoneId
-            };
+            User userModel = registerRequestDto.Adapt<User>(MappingProfile.TypeAdapterConfig);
             var registerResult = await _authRepository.RegisterAsync(
-                useModel,
-                registerRequestDto.Password
+                user: userModel,
+                password: registerRequestDto.Password
             );
             if (!registerResult.Succeeded)
             {

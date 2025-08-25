@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Repositories;
-using Realty_Management_System_Infrastructure.Data.Contexts;
 
 namespace Realty_Management_System_Infrastructure.Repositories
 {
@@ -11,7 +10,6 @@ namespace Realty_Management_System_Infrastructure.Repositories
         private readonly UserManager<User> _userManager;
 
         public AuthRepository(
-            ApplicationDbContext applicationDbContext,
             SignInManager<User> signInManger,
             UserManager<User> userManager
         )
