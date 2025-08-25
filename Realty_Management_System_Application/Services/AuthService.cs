@@ -2,8 +2,10 @@
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Result;
+using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Enums;
 using Realty_Management_System_Domain.Interfaces;
+using Realty_Management_System_Domain.Interfaces.Location;
 using Realty_Management_System_Domain.Repositories;
 using System.Net;
 
@@ -14,16 +16,25 @@ namespace Realty_Management_System_Application.Services
         private readonly IAuthRepository _authRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
+        private readonly ICountryRepository _countryRepository;
+        private readonly ICityRepository _cityRepository;
+        private readonly IZoneRepository _zoneRepository;
 
         public AuthService(
             IAuthRepository authRepository,
             IUserRepository userRepository,
-            IUserIdentifierStrategyFactory userIdentifierStrategyFactory
+            IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
+            ICountryRepository countryRepository,
+            ICityRepository cityRepository,
+            IZoneRepository zoneRepository
         )
         {
             _authRepository = authRepository;
             _userRepository = userRepository;
             _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
+            _countryRepository = countryRepository;
+            _cityRepository = cityRepository;
+            _zoneRepository = zoneRepository;
         }
 
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
@@ -79,6 +90,60 @@ namespace Realty_Management_System_Application.Services
                     error: "Username or email may already be in use."
                 );
             }
+            bool countryExistence = await _countryRepository.ExistsByIdAsync(registerRequestDto.CountryId);
+            if (!countryExistence)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.BadRequest),
+                    message: "Register failed",
+                    error: "The selected country is not valid. Please choose a valid country and try again."
+                );
+            }
+            bool cityExistence = await _cityRepository.ExistsByIdAsync(registerRequestDto.CityId);
+            if (!cityExistence)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.BadRequest),
+                    message: "Register failed",
+                    error: "The selected city is not valid. Please choose a valid city and try again."
+                );
+            }
+            bool zoneExistence = await _zoneRepository.ExistsByIdAsync(registerRequestDto.ZoneId);
+            if (!zoneExistence)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.BadRequest),
+                    message: "Register failed",
+                    error: "The selected zone is not valid. Please choose a valid zone and try again."
+                );
+            }
+            var useModel = new User()
+            {
+                Email = registerRequestDto.Email,
+                UserName = registerRequestDto.UserName,
+                FirstName = registerRequestDto.FirstName,
+                LastName = registerRequestDto.LastName,
+                ProfileImageUrl = registerRequestDto.ProfileImageUrl ?? "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+                CountryId = registerRequestDto.CountryId,
+                CityId = registerRequestDto.CityId,
+                ZoneId = registerRequestDto.ZoneId
+            };
+            var registerResult = await _authRepository.RegisterAsync(
+                useModel,
+                registerRequestDto.Password
+            );
+            if (!registerResult.Succeeded)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)(HttpStatusCode.BadRequest),
+                    message: "Register failed",
+                    error: string.Join(", ", registerResult.Errors)
+                );
+            }
+            return SuccessResult.Create(
+                statusCode: (int)(HttpStatusCode.Created),
+                message: "Register successfully"
+            );
         }
     }
 }
