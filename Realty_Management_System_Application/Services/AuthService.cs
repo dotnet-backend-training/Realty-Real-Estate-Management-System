@@ -1,4 +1,5 @@
-﻿using Realty_Management_System_Application.DTO_s.Auth;
+﻿using Realty_Management_System_Application.Constants;
+using Realty_Management_System_Application.DTO_s.Auth;
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Result;
@@ -13,21 +14,22 @@ namespace Realty_Management_System_Application.Services
     public class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepository;
-        private readonly IUserRepository _userRepository;
         private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
         private readonly ILocationValidator _locationValidator;
+        private readonly IUserValidator _userValidator;
 
         public AuthService(
             IAuthRepository authRepository,
             IUserRepository userRepository,
             IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
-            ILocationValidator locationValidator
+            ILocationValidator locationValidator,
+            IUserValidator userValidator
         )
         {
             _authRepository = authRepository;
-            _userRepository = userRepository;
             _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
             _locationValidator = locationValidator;
+            _userValidator = userValidator;
         }
 
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
@@ -65,23 +67,14 @@ namespace Realty_Management_System_Application.Services
 
         public async Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
-            bool userNameExistence = await _userRepository.ExistsByUsernameAsync(registerRequestDto.UserName);
-            if (userNameExistence)
+
+            var userValidationResult = await _userValidator.ValidateAllAsync(
+                username: registerRequestDto.UserName,
+                email: registerRequestDto.Email
+            );
+            if (!userValidationResult.Success)
             {
-                return FailureResult.Create(
-                    statusCode: (int)(HttpStatusCode.Conflict),
-                    message: "Register failed",
-                    error: "Username or email may already be in use."
-                );
-            }
-            bool emailExistence = await _userRepository.ExistsByEmailAsync(registerRequestDto.Email);
-            if (emailExistence)
-            {
-                return FailureResult.Create(
-                    statusCode: (int)(HttpStatusCode.Conflict),
-                    message: "Register failed",
-                    error: "Username or email may already be in use."
-                );
+                return userValidationResult;
             }
             var locationValidationResult = await _locationValidator.ValidateAllAsync(
                 countryId: registerRequestDto.CountryId,
@@ -98,7 +91,7 @@ namespace Realty_Management_System_Application.Services
                 UserName = registerRequestDto.UserName,
                 FirstName = registerRequestDto.FirstName,
                 LastName = registerRequestDto.LastName,
-                ProfileImageUrl = registerRequestDto.ProfileImageUrl ?? "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+                ProfileImageUrl = registerRequestDto.ProfileImageUrl ?? DefaultImages.ProfileImageUrl,
                 CountryId = registerRequestDto.CountryId,
                 CityId = registerRequestDto.CityId,
                 ZoneId = registerRequestDto.ZoneId
