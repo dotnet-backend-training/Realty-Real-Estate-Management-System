@@ -1,4 +1,5 @@
 using FluentValidation;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -76,6 +77,9 @@ namespace Realty_Management_System_API
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ILocationValidator, LocationValidator>();
             builder.Services.AddScoped<IUserValidator, UserValidator>();
+
+            var globalTypeAdapterConfiguration = TypeAdapterConfig.GlobalSettings;
+            builder.Services.AddSingleton(globalTypeAdapterConfiguration);
 
             var app = builder.Build();
 
