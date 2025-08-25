@@ -137,7 +137,7 @@ namespace Realty_Management_System_Application.Services
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.BadRequest),
                     message: "Register failed",
-                    error: string.Join(", ", registerResult.Errors)
+                    error: string.Join(", ", registerResult.Errors.Select(error => error.Description))
                 );
             }
             return SuccessResult.Create(

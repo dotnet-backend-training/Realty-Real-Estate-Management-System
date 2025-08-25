@@ -5,11 +5,14 @@ using Microsoft.IdentityModel.Tokens;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Services;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Domain.Interfaces;
+using Realty_Management_System_Domain.Interfaces.Location;
 using Realty_Management_System_Domain.Repositories;
 using Realty_Management_System_Infrastructure.Constants;
 using Realty_Management_System_Infrastructure.Data.Contexts;
 using Realty_Management_System_Infrastructure.Exceptions;
 using Realty_Management_System_Infrastructure.Repositories;
+using Realty_Management_System_Infrastructure.Repositories.Location;
 using Realty_Management_System_Infrastructure.Strategies.UserIdentifier;
 using System.Reflection;
 
@@ -64,6 +67,12 @@ namespace Realty_Management_System_API
             builder.Services.AddScoped<IUserIdentifierStrategy, EmailIdentifierStrategy>();
             builder.Services.AddScoped<IUserIdentifierStrategy, UsernameIdentifierStrategy>();
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            builder.Services.AddScoped<ICityRepository, CityRepository>();
+            builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+            builder.Services.AddScoped<IZoneRepository, ZoneRepository>();
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 
