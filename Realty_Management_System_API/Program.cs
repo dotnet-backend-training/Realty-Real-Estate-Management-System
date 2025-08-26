@@ -1,22 +1,4 @@
-using FluentValidation;
-using Mapster;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Realty_Management_System_Application.Interfaces;
-using Realty_Management_System_Application.Services;
-using Realty_Management_System_Application.Validators;
-using Realty_Management_System_Domain.Entities;
-using Realty_Management_System_Domain.Interfaces;
-using Realty_Management_System_Domain.Interfaces.Location;
-using Realty_Management_System_Domain.Repositories;
-using Realty_Management_System_Infrastructure.Constants;
-using Realty_Management_System_Infrastructure.Data.Contexts;
-using Realty_Management_System_Infrastructure.Exceptions;
-using Realty_Management_System_Infrastructure.Repositories;
-using Realty_Management_System_Infrastructure.Repositories.Location;
-using Realty_Management_System_Infrastructure.Strategies.UserIdentifier;
-using System.Reflection;
+using Realty_Management_System_API.Extensions;
 
 namespace Realty_Management_System_API
 {
@@ -26,64 +8,18 @@ namespace Realty_Management_System_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Infrastructure services layer
-
-            // Identity configuration
-            builder.Services.AddIdentity<User, IdentityRole<Guid>>(
-                options =>
-                {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-                    options.Password.RequiredUniqueChars = 0;
-                }
-            ).AddEntityFrameworkStores<ApplicationDbContext>();
-
-            // ApplicationDbContext configuration
-            builder.Services.AddDbContext<ApplicationDbContext>(
-                options =>
-                {
-                    string? connectionString = builder.Configuration.GetConnectionString(
-                     AppSettingsConstants.AppSettingsKeys.ConnectionStrings.DefaultConnection
-                    );
-                    if (connectionString.IsNullOrEmpty())
-                    {
-                        throw AppSettingException.ConnectionStrings.DefaultConnectionStringNotFound;
-                    }
-                    options.UseSqlServer(connectionString);
-                }
-            );
-
-            // Application services layer
-            builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-            builder.Services.AddScoped<IUserIdentifierStrategyFactory, UserIdentifierStrategyFactory>();
-            builder.Services.AddScoped<IUserIdentifierStrategy, EmailIdentifierStrategy>();
-            builder.Services.AddScoped<IUserIdentifierStrategy, UsernameIdentifierStrategy>();
-            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
-            builder.Services.AddScoped<ICityRepository, CityRepository>();
-            builder.Services.AddScoped<ICountryRepository, CountryRepository>();
-            builder.Services.AddScoped<IZoneRepository, ZoneRepository>();
-
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<ILocationValidator, LocationValidator>();
-            builder.Services.AddScoped<IUserValidator, UserValidator>();
-
-            var globalTypeAdapterConfiguration = TypeAdapterConfig.GlobalSettings;
-            builder.Services.AddSingleton(globalTypeAdapterConfiguration);
+            // Custom extension methods for registrations
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
+            builder.Services.AddValidators();
+            builder.Services.AddMappings();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -91,10 +27,7 @@ namespace Realty_Management_System_API
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
