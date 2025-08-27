@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Realty_Management_System_Application.DTO_s.Auth;
+using Realty_Management_System_Application.DTO_s.Auth.Register;
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Interfaces.Services;
@@ -112,9 +113,15 @@ namespace Realty_Management_System_Application.Services
                     error: string.Join(", ", registerResult.Errors.Select(error => error.Description))
                 );
             }
-            return SuccessResult.Create(
+            var accessToken = await _tokenGenerator.GenerateAccessTokenAsync(userModel);
+            var registerResponseDto = userModel.Adapt<RegisterResponseDto>();
+            var userRoles = await _userRoleRepository.GetUserRolesAsync(userModel);
+            registerResponseDto.Roles = userRoles;
+            registerResponseDto.AccessToken = accessToken;
+            return SuccessResult<RegisterResponseDto>.Create(
                 statusCode: (int)(HttpStatusCode.Created),
-                message: "Register successfully"
+                message: "Register successfully",
+                data: registerResponseDto
             );
         }
     }

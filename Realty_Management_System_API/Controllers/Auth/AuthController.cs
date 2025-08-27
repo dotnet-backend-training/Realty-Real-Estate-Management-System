@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Realty_Management_System_Application.DTO_s.Auth;
+using Realty_Management_System_Application.DTO_s.Auth.Register;
 using Realty_Management_System_Application.Interfaces.Services;
 using Realty_Management_System_Application.Shared.Result;
 
@@ -48,7 +49,10 @@ namespace Realty_Management_System_API.Controllers.Auth
             }
             else if (loginResult is SuccessResult<LoginResponseDto> loginSuccessResult)
             {
-                return Ok(loginSuccessResult);
+                return StatusCode(
+                    statusCode: loginSuccessResult.StatusCode,
+                    value: loginSuccessResult
+                );
             }
             else
             {
@@ -86,9 +90,12 @@ namespace Realty_Management_System_API.Controllers.Auth
                     detail: string.Join(", ", registerFailureResult.Errors)
                 );
             }
-            else if (registerResult is SuccessResult registerSuccessResult)
+            else if (registerResult is SuccessResult<RegisterResponseDto> registerSuccessResult)
             {
-                return Ok(registerResult);
+                return StatusCode(
+                    statusCode: registerSuccessResult.StatusCode,
+                    value: registerSuccessResult
+                );
             }
             else
             {
