@@ -16,7 +16,7 @@ namespace Realty_Management_System_Infrastructure.Services.Authentication
         }
         public async Task<IEnumerable<Claim>> GetClaimsAsync(User user)
         {
-            ArgumentNullException.ThrowIfNull(user);
+            ArgumentNullException.ThrowIfNull(user, nameof(user));
 
             var authClaims = new List<Claim> {
                 new(type: JwtRegisteredClaimNames.Sub, value: user.UserName ?? string.Empty),

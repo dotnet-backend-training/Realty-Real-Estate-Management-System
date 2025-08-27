@@ -56,6 +56,7 @@ namespace Realty_Management_System_API.Extensions
             // General Repositories
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             #endregion
 
             #region Services

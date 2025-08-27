@@ -46,7 +46,7 @@ namespace Realty_Management_System_API.Controllers.Auth
                     detail: string.Join(", ", loginFailureResult.Errors)
                 );
             }
-            else if (loginResult is SuccessResult loginSuccessResult)
+            else if (loginResult is SuccessResult<LoginResponseDto> loginSuccessResult)
             {
                 return Ok(loginSuccessResult);
             }

@@ -8,6 +8,7 @@ using Realty_Management_System_Application.Mapping;
 using Realty_Management_System_Application.Shared.Result;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Enums;
+using Realty_Management_System_Domain.Interfaces;
 using Realty_Management_System_Domain.Repositories;
 using System.Net;
 
@@ -19,18 +20,25 @@ namespace Realty_Management_System_Application.Services
         private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
         private readonly ILocationValidator _locationValidator;
         private readonly IUserValidator _userValidator;
+        private readonly IJwtTokenGenerator _tokenGenerator;
+        private readonly IUserRoleRepository _userRoleRepository;
 
         public AuthService(
             IAuthRepository authRepository,
             IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
             ILocationValidator locationValidator,
-            IUserValidator userValidator
+            IUserValidator userValidator,
+            IJwtTokenGenerator tokenGenerator,
+            IUserRepository userRepository,
+            IUserRoleRepository userRoleRepository
         )
         {
             _authRepository = authRepository;
             _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
             _locationValidator = locationValidator;
             _userValidator = userValidator;
+            _tokenGenerator = tokenGenerator;
+            _userRoleRepository = userRoleRepository;
         }
 
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
@@ -60,9 +68,15 @@ namespace Realty_Management_System_Application.Services
                     error: "Invalid credentials, please try again."
                 );
             }
-            return SuccessResult.Create(
+            var accessToken = await _tokenGenerator.GenerateAccessTokenAsync(foundUser);
+            var loginResponseDto = foundUser.Adapt<LoginResponseDto>();
+            var userRoles = await _userRoleRepository.GetUserRolesAsync(foundUser);
+            loginResponseDto.Roles = userRoles;
+            loginResponseDto.AccessToken = accessToken;
+            return SuccessResult<LoginResponseDto>.Create(
                 statusCode: (int)HttpStatusCode.OK,
-                message: "Login successful"
+                message: "Login successful",
+                data: loginResponseDto
             );
         }
 

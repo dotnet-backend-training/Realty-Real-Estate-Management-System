@@ -12,6 +12,7 @@ namespace Realty_Management_System_Application.Mapping
 
         static MappingProfile()
         {
+            // RegisterRequestDto → User.
             _config.NewConfig<RegisterRequestDto, User>().Map(
                 member: userModelDest => userModelDest.ProfileImageUrl,
                 source: registerRequestDtoSource =>
