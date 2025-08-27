@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Realty_Management_System_API.Constants;
+using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Shared.Services;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Interfaces;
@@ -13,6 +14,7 @@ using Realty_Management_System_Infrastructure.Repositories;
 using Realty_Management_System_Infrastructure.Repositories.Location;
 using Realty_Management_System_Infrastructure.Services;
 using Realty_Management_System_Infrastructure.Services.Authentication;
+using Realty_Management_System_Infrastructure.Services.Authentication.Jwt;
 
 namespace Realty_Management_System_API.Extensions
 {
@@ -57,8 +59,9 @@ namespace Realty_Management_System_API.Extensions
             #endregion
 
             #region Services
-            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IUserClaimsProvider, UserClaimsProvider>();
             #endregion
 
             services.Configure<JwtSettings>(

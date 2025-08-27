@@ -1,4 +1,4 @@
-﻿namespace Realty_Management_System_Infrastructure.Services.Authentication
+﻿namespace Realty_Management_System_Infrastructure.Services.Authentication.Jwt
 {
     public class JwtSettings
     {
