@@ -1,4 +1,4 @@
-﻿using Realty_Management_System_Application.Interfaces;
+﻿using Realty_Management_System_Application.Interfaces.Validators;
 using Realty_Management_System_Application.Shared.Result;
 using Realty_Management_System_Domain.Interfaces;
 using System.Net;

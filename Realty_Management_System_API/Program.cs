@@ -12,6 +12,10 @@ namespace Realty_Management_System_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Configuration
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
             // Custom extension methods for registrations
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();

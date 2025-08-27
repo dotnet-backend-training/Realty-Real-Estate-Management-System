@@ -1,6 +1,6 @@
 ﻿using Realty_Management_System_Application.Shared.Result;
 
-namespace Realty_Management_System_Application.Interfaces
+namespace Realty_Management_System_Application.Interfaces.Validators
 {
     public interface IUserValidator
     {

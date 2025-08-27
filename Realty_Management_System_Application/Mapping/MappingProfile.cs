@@ -1,11 +1,11 @@
 ﻿using Mapster;
 using Realty_Management_System_Application.Constants;
-using Realty_Management_System_Domain.DTO_s.Auth;
+using Realty_Management_System_Application.DTO_s.Auth;
 using Realty_Management_System_Domain.Entities;
 
-namespace Realty_Management_System_Domain.MappingProfile
+namespace Realty_Management_System_Application.Mapping
 {
-    public class MappingProfile
+    public static class MappingProfile
     {
         private static readonly TypeAdapterConfig _config = new();
         public static TypeAdapterConfig TypeAdapterConfig => _config;
@@ -13,7 +13,7 @@ namespace Realty_Management_System_Domain.MappingProfile
         static MappingProfile()
         {
             _config.NewConfig<RegisterRequestDto, User>().Map(
-                member: userMdoelDest => userMdoelDest.ProfileImageUrl,
+                member: userModelDest => userModelDest.ProfileImageUrl,
                 source: registerRequestDtoSource =>
                 registerRequestDtoSource.ProfileImageUrl ?? DefaultImages.ProfileImageUrl
             );

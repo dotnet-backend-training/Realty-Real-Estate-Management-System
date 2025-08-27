@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Realty_Management_System_API.Constants;
+using Realty_Management_System_Application.Shared.Services;
 using Realty_Management_System_Domain.Entities;
 using Realty_Management_System_Domain.Interfaces;
 using Realty_Management_System_Domain.Interfaces.Location;
@@ -9,6 +11,8 @@ using Realty_Management_System_Infrastructure.Data.Contexts;
 using Realty_Management_System_Infrastructure.Exceptions;
 using Realty_Management_System_Infrastructure.Repositories;
 using Realty_Management_System_Infrastructure.Repositories.Location;
+using Realty_Management_System_Infrastructure.Services;
+using Realty_Management_System_Infrastructure.Services.Authentication;
 
 namespace Realty_Management_System_API.Extensions
 {
@@ -18,7 +22,7 @@ namespace Realty_Management_System_API.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            // Identity
+            #region Identity
             services.AddIdentity<User, IdentityRole<Guid>>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -26,9 +30,11 @@ namespace Realty_Management_System_API.Extensions
                 options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredUniqueChars = 0;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+            #endregion
 
-            // DbContext
+            #region DbContext
             string? connectionString = configuration.GetConnectionString(
                 AppSettingsConstants.AppSettingsKeys.ConnectionStrings.DefaultConnection);
 
@@ -37,13 +43,27 @@ namespace Realty_Management_System_API.Extensions
 
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(connectionString));
+            #endregion
 
-            // Repositories
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            #region Repositories
+            // Location Repositories
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
+
+            // General Repositories
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            #endregion
+
+            #region Services
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            #endregion
+
+            services.Configure<JwtSettings>(
+                configuration.GetSection(ConfigurationKeys.JwtSettings)
+            );
 
             return services;
         }

@@ -1,4 +1,4 @@
-﻿namespace Realty_Management_System_Domain.DTO_s.Auth
+﻿namespace Realty_Management_System_Application.DTO_s.Auth
 {
     public class LoginRequestDto
     {

@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Realty_Management_System_Application.Interfaces;
+using Realty_Management_System_Application.DTO_s.Auth;
+using Realty_Management_System_Application.Interfaces.Services;
 using Realty_Management_System_Application.Shared.Result;
-using Realty_Management_System_Domain.DTO_s.Auth;
 
 namespace Realty_Management_System_API.Controllers.Auth
 {

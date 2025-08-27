@@ -1,4 +1,5 @@
 ﻿using Realty_Management_System_Application.Interfaces;
+using Realty_Management_System_Application.Interfaces.Services;
 using Realty_Management_System_Application.Services;
 using Realty_Management_System_Infrastructure.Strategies.UserIdentifier;
 
