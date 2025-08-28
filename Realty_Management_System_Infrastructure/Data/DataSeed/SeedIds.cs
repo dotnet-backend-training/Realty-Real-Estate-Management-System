@@ -164,5 +164,11 @@
         public static readonly Guid Transaction3 = Guid.Parse("00002103-0000-0000-0000-000000002103");
         public static readonly Guid Transaction4 = Guid.Parse("00002104-0000-0000-0000-000000002104");
         public static readonly Guid Transaction5 = Guid.Parse("00002105-0000-0000-0000-000000002105");
+
+        // Roles
+        public static readonly Guid RoleAdmin = Guid.Parse("00003001-0000-0000-0000-000000003001");
+        public static readonly Guid RolePropertyOwner = Guid.Parse("00003002-0000-0000-0000-000000003002");
+        public static readonly Guid RoleBuyerTenant = Guid.Parse("00003003-0000-0000-0000-000000003003");
+
     }
 }
