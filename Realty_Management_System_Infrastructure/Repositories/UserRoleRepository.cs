@@ -12,6 +12,19 @@ namespace Realty_Management_System_Infrastructure.Repositories
         {
             _userManager = userManager;
         }
+
+        public async Task<IdentityResult> AddToRoleAsync(User user, string roleName)
+        {
+            return await _userManager.AddToRoleAsync(user, roleName);
+        }
+
+        public async Task<IdentityResult> AddToRolesAsync(User user, IEnumerable<string> roleNames)
+        {
+            ArgumentNullException.ThrowIfNull(user, nameof(user));
+            ArgumentNullException.ThrowIfNull(roleNames, nameof(roleNames));
+            return await _userManager.AddToRolesAsync(user, roleNames);
+        }
+
         public async Task<IEnumerable<string>> GetUserRolesAsync(User user)
         {
             ArgumentNullException.ThrowIfNull(user, nameof(user));

@@ -23,15 +23,18 @@ namespace Realty_Management_System_Application.Services
         private readonly IUserValidator _userValidator;
         private readonly IJwtTokenGenerator _tokenGenerator;
         private readonly IUserRoleRepository _userRoleRepository;
+        private readonly IRoleValidator _roleValidator;
+        private readonly IRoleRepository _roleRepository;
 
         public AuthService(
-            IAuthRepository authRepository,
             IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
             ILocationValidator locationValidator,
             IUserValidator userValidator,
+            IRoleValidator roleValidator,
             IJwtTokenGenerator tokenGenerator,
-            IUserRepository userRepository,
-            IUserRoleRepository userRoleRepository
+            IUserRoleRepository userRoleRepository,
+            IAuthRepository authRepository,
+            IRoleRepository roleRepository
         )
         {
             _authRepository = authRepository;
@@ -40,6 +43,8 @@ namespace Realty_Management_System_Application.Services
             _userValidator = userValidator;
             _tokenGenerator = tokenGenerator;
             _userRoleRepository = userRoleRepository;
+            _roleValidator = roleValidator;
+            _roleRepository = roleRepository;
         }
 
         public async Task<Result> LoginAsync(LoginRequestDto loginRequestDto)
@@ -100,6 +105,11 @@ namespace Realty_Management_System_Application.Services
             {
                 return locationValidationResult;
             }
+            var roleValidationResult = await _roleValidator.ValidateRolesAsync(registerRequestDto.RoleIds);
+            if (!roleValidationResult.Success)
+            {
+                return roleValidationResult;
+            }
             User userModel = registerRequestDto.Adapt<User>(MappingProfile.TypeAdapterConfig);
             var registerResult = await _authRepository.RegisterAsync(
                 user: userModel,
@@ -115,8 +125,12 @@ namespace Realty_Management_System_Application.Services
             }
             var accessToken = await _tokenGenerator.GenerateAccessTokenAsync(userModel);
             var registerResponseDto = userModel.Adapt<RegisterResponseDto>();
-            var userRoles = await _userRoleRepository.GetUserRolesAsync(userModel);
-            registerResponseDto.Roles = userRoles;
+            var roles = await _roleRepository.GetRolesByIdsAsync(registerRequestDto.RoleIds);
+            var addRolesToUserResult = await _userRoleRepository.AddToRolesAsync(
+                user: userModel,
+                roleNames: roles!.Select(role => role!.Name!)
+            );
+            registerResponseDto.RoleNames = roles.Select(role => role!.Name!);
             registerResponseDto.AccessToken = accessToken;
             return SuccessResult<RegisterResponseDto>.Create(
                 statusCode: (int)(HttpStatusCode.Created),

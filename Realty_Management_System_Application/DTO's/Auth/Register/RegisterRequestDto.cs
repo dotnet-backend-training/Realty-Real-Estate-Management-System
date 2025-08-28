@@ -11,5 +11,6 @@
         public Guid CountryId { get; set; }
         public Guid CityId { get; set; }
         public Guid ZoneId { get; set; }
+        public HashSet<Guid> RoleIds { get; set; } = new();
     }
 }

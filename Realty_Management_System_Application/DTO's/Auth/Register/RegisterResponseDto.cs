@@ -4,7 +4,7 @@
     {
         public string? UserName { get; set; }
         public string? Email { get; set; }
-        public IEnumerable<string> Roles { get; set; } = new HashSet<string>();
+        public IEnumerable<string> RoleNames { get; set; } = new HashSet<string>();
         public required string AccessToken { get; set; }
         public DateTime ExpiresAt { get; set; }
         public string? RefreshToken { get; set; }

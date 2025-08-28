@@ -44,6 +44,12 @@ namespace Realty_Management_System_API.Validators
             RuleFor(x => x.ZoneId)
                 .NotEmpty()
                 .WithMessage("Zone is required.");
+
+            RuleFor(x => x.RoleIds)
+                .NotEmpty()
+                .WithMessage("At least one role is required.")
+                .Must(roleIds => roleIds.All(roleId => roleId != Guid.Empty))
+                .WithMessage("Role Id(s) cannot be empty GUID.");
         }
     }
 }

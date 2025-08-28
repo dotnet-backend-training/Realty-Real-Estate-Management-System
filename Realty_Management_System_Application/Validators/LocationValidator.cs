@@ -44,7 +44,7 @@ namespace Realty_Management_System_Application.Validators
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.BadRequest),
-                    message: "Register failed",
+                    message: "Invalid city",
                     error: "The selected city is not valid. Please choose a valid city and try again."
                 );
             }
@@ -61,7 +61,7 @@ namespace Realty_Management_System_Application.Validators
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.BadRequest),
-                    message: "Register failed",
+                    message: "Invalid country",
                     error: "The selected country is not valid. Please choose a valid country and try again."
                 );
             }
@@ -78,7 +78,7 @@ namespace Realty_Management_System_Application.Validators
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.BadRequest),
-                    message: "Register failed",
+                    message: "Invalid zone",
                     error: "The selected zone is not valid. Please choose a valid zone and try again."
                 );
             }

@@ -38,8 +38,8 @@ namespace Realty_Management_System_Application.Validators
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.Conflict),
-                    message: "Register failed",
-                    error: "Username or email may already be in use."
+                    message: "Invalid email",
+                    error: "email may already be in use."
                 );
             }
             return SuccessResult.Create(
@@ -55,8 +55,8 @@ namespace Realty_Management_System_Application.Validators
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.Conflict),
-                    message: "Register failed",
-                    error: "Username or email may already be in use."
+                    message: "Invalid username",
+                    error: "Username may already be in use."
                 );
             }
             return SuccessResult.Create(

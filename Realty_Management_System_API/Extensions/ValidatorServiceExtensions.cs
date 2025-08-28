@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Interfaces.Validators;
 using Realty_Management_System_Application.Validators;
 using System.Reflection;
@@ -11,6 +12,7 @@ namespace Realty_Management_System_API.Extensions
         {
             services.AddScoped<ILocationValidator, LocationValidator>();
             services.AddScoped<IUserValidator, UserValidator>();
+            services.AddScoped<IRoleValidator, RoleValidator>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
