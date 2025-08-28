@@ -27,14 +27,14 @@ namespace Realty_Management_System_Application.Services
         private readonly IRoleRepository _roleRepository;
 
         public AuthService(
+            IAuthRepository authRepository,
             IUserIdentifierStrategyFactory userIdentifierStrategyFactory,
-            ILocationValidator locationValidator,
-            IUserValidator userValidator,
-            IRoleValidator roleValidator,
             IJwtTokenGenerator tokenGenerator,
             IUserRoleRepository userRoleRepository,
-            IAuthRepository authRepository,
-            IRoleRepository roleRepository
+            IRoleRepository roleRepository,
+            IUserValidator userValidator,
+            IRoleValidator roleValidator,
+            ILocationValidator locationValidator
         )
         {
             _authRepository = authRepository;
@@ -70,7 +70,7 @@ namespace Realty_Management_System_Application.Services
             {
                 return FailureResult.Create(
                     statusCode: (int)(HttpStatusCode.BadRequest),
-                    message: "Login failed",
+                    message: "Failed to login.",
                     error: "Invalid credentials, please try again."
                 );
             }
@@ -123,18 +123,28 @@ namespace Realty_Management_System_Application.Services
                     error: string.Join(", ", registerResult.Errors.Select(error => error.Description))
                 );
             }
-            var accessToken = await _tokenGenerator.GenerateAccessTokenAsync(userModel);
             var registerResponseDto = userModel.Adapt<RegisterResponseDto>();
             var roles = await _roleRepository.GetRolesByIdsAsync(registerRequestDto.RoleIds);
             var addRolesToUserResult = await _userRoleRepository.AddToRolesAsync(
                 user: userModel,
                 roleNames: roles!.Select(role => role!.Name!)
             );
+            if (!addRolesToUserResult.Succeeded)
+            {
+                return FailureResult.Create(
+                    statusCode: (int)HttpStatusCode.BadRequest,
+                    message: "Role assignment failed",
+                    error: string.Join(", ",
+                        addRolesToUserResult.Errors.Select(e => e.Description)
+                    )
+                );
+            }
+            var accessToken = await _tokenGenerator.GenerateAccessTokenAsync(userModel);
             registerResponseDto.RoleNames = roles.Select(role => role!.Name!);
             registerResponseDto.AccessToken = accessToken;
             return SuccessResult<RegisterResponseDto>.Create(
                 statusCode: (int)(HttpStatusCode.Created),
-                message: "Register successfully",
+                message: "Registered successfully",
                 data: registerResponseDto
             );
         }
