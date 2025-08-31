@@ -88,24 +88,28 @@ namespace Realty_Management_System_Application.Services
 
         public async Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
-            var userValidationResult = await _userValidator.ValidateAllAsync(
+            var userValidationTask = _userValidator.ValidateAllAsync(
                 username: registerRequestDto.UserName,
                 email: registerRequestDto.Email
             );
-            if (!userValidationResult.Success)
-            {
-                return userValidationResult;
-            }
-            var locationValidationResult = await _locationValidator.ValidateAllAsync(
+            var locationValidationTask = _locationValidator.ValidateAllAsync(
                 countryId: registerRequestDto.CountryId,
                 cityId: registerRequestDto.CityId,
                 zoneId: registerRequestDto.ZoneId
             );
+            var roleValidationTask = _roleValidator.ValidateRolesAsync(registerRequestDto.RoleIds);
+            await Task.WhenAll(userValidationTask, locationValidationTask, roleValidationTask);
+            var userValidationResult = await userValidationTask;
+            var locationValidationResult = await locationValidationTask;
+            var roleValidationResult = await roleValidationTask;
+            if (!userValidationResult.Success)
+            {
+                return userValidationResult;
+            }
             if (!locationValidationResult.Success)
             {
                 return locationValidationResult;
             }
-            var roleValidationResult = await _roleValidator.ValidateRolesAsync(registerRequestDto.RoleIds);
             if (!roleValidationResult.Success)
             {
                 return roleValidationResult;
