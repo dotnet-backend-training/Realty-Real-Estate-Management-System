@@ -4,7 +4,6 @@ using Realty_Management_System_Application.DTO_s.Auth.Register;
 using Realty_Management_System_Application.Helpers;
 using Realty_Management_System_Application.Interfaces;
 using Realty_Management_System_Application.Interfaces.Services;
-using Realty_Management_System_Application.Interfaces.Validators;
 using Realty_Management_System_Application.Mapping;
 using Realty_Management_System_Application.Shared.Result;
 using Realty_Management_System_Domain.Entities;
@@ -19,11 +18,9 @@ namespace Realty_Management_System_Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IUserIdentifierStrategyFactory _userIdentifierStrategyFactory;
-        private readonly ILocationValidator _locationValidator;
-        private readonly IUserValidator _userValidator;
+        private readonly ValidationRuleSet<RegisterRequestDto> _registerRuleSet;
         private readonly IJwtTokenGenerator _tokenGenerator;
         private readonly IUserRoleRepository _userRoleRepository;
-        private readonly IRoleValidator _roleValidator;
         private readonly IRoleRepository _roleRepository;
 
         public AuthService(
@@ -32,18 +29,14 @@ namespace Realty_Management_System_Application.Services
             IJwtTokenGenerator tokenGenerator,
             IUserRoleRepository userRoleRepository,
             IRoleRepository roleRepository,
-            IUserValidator userValidator,
-            IRoleValidator roleValidator,
-            ILocationValidator locationValidator
+            ValidationRuleSet<RegisterRequestDto> registerRuleSet
         )
         {
             _authRepository = authRepository;
             _userIdentifierStrategyFactory = userIdentifierStrategyFactory;
-            _locationValidator = locationValidator;
-            _userValidator = userValidator;
+            _registerRuleSet = registerRuleSet;
             _tokenGenerator = tokenGenerator;
             _userRoleRepository = userRoleRepository;
-            _roleValidator = roleValidator;
             _roleRepository = roleRepository;
         }
 
@@ -88,31 +81,10 @@ namespace Realty_Management_System_Application.Services
 
         public async Task<Result> RegisterAsync(RegisterRequestDto registerRequestDto)
         {
-            var userValidationTask = _userValidator.ValidateAllAsync(
-                username: registerRequestDto.UserName,
-                email: registerRequestDto.Email
-            );
-            var locationValidationTask = _locationValidator.ValidateAllAsync(
-                countryId: registerRequestDto.CountryId,
-                cityId: registerRequestDto.CityId,
-                zoneId: registerRequestDto.ZoneId
-            );
-            var roleValidationTask = _roleValidator.ValidateRolesAsync(registerRequestDto.RoleIds);
-            await Task.WhenAll(userValidationTask, locationValidationTask, roleValidationTask);
-            var userValidationResult = await userValidationTask;
-            var locationValidationResult = await locationValidationTask;
-            var roleValidationResult = await roleValidationTask;
-            if (!userValidationResult.Success)
+            var validationResult = await _registerRuleSet.ValidateAllAsync(registerRequestDto);
+            if (!validationResult.Success)
             {
-                return userValidationResult;
-            }
-            if (!locationValidationResult.Success)
-            {
-                return locationValidationResult;
-            }
-            if (!roleValidationResult.Success)
-            {
-                return roleValidationResult;
+                return validationResult;
             }
             User userModel = registerRequestDto.Adapt<User>(MappingProfile.TypeAdapterConfig);
             var registerResult = await _authRepository.RegisterAsync(
