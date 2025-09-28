@@ -1,10 +1,4 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Realty_Management_System_Domain.Entities;
-using Realty_Management_System_Infrastructure.Constants;
-using Realty_Management_System_Infrastructure.Data.Contexts;
-using Realty_Management_System_Infrastructure.Exceptions;
+using Realty_Management_System_API.Extensions;
 
 namespace Realty_Management_System_API
 {
@@ -14,46 +8,22 @@ namespace Realty_Management_System_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Infrastructure services layer
+            builder.Configuration
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-            // Identity configuration
-            builder.Services.AddIdentity<User, IdentityRole<Guid>>(
-                options =>
-                {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-                    options.Password.RequiredUniqueChars = 0;
-                }
-            ).AddEntityFrameworkStores<ApplicationDbContext>();
-
-            // ApplicationDbContext configuration
-            builder.Services.AddDbContext<ApplicationDbContext>(
-                options =>
-                {
-                    string? connectionString = builder.Configuration.GetConnectionString(
-                     AppSettingsConstants.AppSettingsKeys.ConnectionStrings.DefaultConnection
-                    );
-                    if (connectionString.IsNullOrEmpty())
-                    {
-                        throw AppSettingException.ConnectionStrings.DefaultConnectionStringNotFound;
-                    }
-                    options.UseSqlServer(connectionString);
-                }
-            );
-
+            // Custom extension methods for registrations
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
+            builder.Services.AddValidators();
+            builder.Services.AddMappings();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -61,10 +31,7 @@ namespace Realty_Management_System_API
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

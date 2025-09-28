@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Realty_Management_System_Domain.Entities;
+using Realty_Management_System_Infrastructure.Data.DataSeed;
 
 namespace Realty_Management_System_Infrastructure.Persistence.Configurations
 {
@@ -57,6 +58,8 @@ namespace Realty_Management_System_Infrastructure.Persistence.Configurations
                 .WithOne(transaction => transaction.PropertyReview)
                 .HasForeignKey<PropertyReview>(propertyReview => propertyReview.TransactionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(PropertyReviewSeedData.GetPropertyReviews());
         }
     }
 }

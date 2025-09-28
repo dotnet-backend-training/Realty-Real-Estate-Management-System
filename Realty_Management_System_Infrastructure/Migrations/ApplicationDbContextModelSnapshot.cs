@@ -48,6 +48,29 @@ namespace Realty_Management_System_Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00003001-0000-0000-0000-000000003001"),
+                            ConcurrencyStamp = "b04c1030-6504-45d3-a54a-fa8935d1015a",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("00003002-0000-0000-0000-000000003002"),
+                            ConcurrencyStamp = "efe5f642-bccf-4f75-9c26-eaf8f58f94b1",
+                            Name = "PropertyOwner",
+                            NormalizedName = "PROPERTYOWNER"
+                        },
+                        new
+                        {
+                            Id = new Guid("00003003-0000-0000-0000-000000003003"),
+                            ConcurrencyStamp = "884876ea-aa8e-49a3-a3aa-263d4e40078a",
+                            Name = "BuyerTenant",
+                            NormalizedName = "BUYERTENANT"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -172,6 +195,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Amenities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000401-0000-0000-0000-000000000401"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 485, DateTimeKind.Utc).AddTicks(5699),
+                            Name = "Swimming Pool"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000402-0000-0000-0000-000000000402"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 485, DateTimeKind.Utc).AddTicks(5703),
+                            Name = "Gym"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000403-0000-0000-0000-000000000403"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 485, DateTimeKind.Utc).AddTicks(5704),
+                            Name = "Parking"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000404-0000-0000-0000-000000000404"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 485, DateTimeKind.Utc).AddTicks(5705),
+                            Name = "Elevator"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000405-0000-0000-0000-000000000405"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 485, DateTimeKind.Utc).AddTicks(5706),
+                            Name = "Garden"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.City", b =>
@@ -205,6 +260,53 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 486, DateTimeKind.Utc).AddTicks(976),
+                            Latitude = 32.2211m,
+                            Longitude = 35.2544m,
+                            Name = "Nablus"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000102-0000-0000-0000-000000000102"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 486, DateTimeKind.Utc).AddTicks(982),
+                            Latitude = 31.9076m,
+                            Longitude = 35.2034m,
+                            Name = "Ramallah"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000103-0000-0000-0000-000000000103"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 486, DateTimeKind.Utc).AddTicks(985),
+                            Latitude = 31.5326m,
+                            Longitude = 35.0998m,
+                            Name = "Hebron"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000104-0000-0000-0000-000000000104"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 486, DateTimeKind.Utc).AddTicks(987),
+                            Latitude = 31.7054m,
+                            Longitude = 35.2024m,
+                            Name = "Bethlehem"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000105-0000-0000-0000-000000000105"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 486, DateTimeKind.Utc).AddTicks(988),
+                            Latitude = 32.4576m,
+                            Longitude = 35.2936m,
+                            Name = "Jenin"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Contract", b =>
@@ -260,6 +362,73 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PropertyId");
 
                     b.ToTable("Contracts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000601-0000-0000-0000-000000000601"),
+                            ContractTypeId = new Guid("00000501-0000-0000-0000-000000000501"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 490, DateTimeKind.Utc).AddTicks(8657),
+                            CustomerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000301-0000-0000-0000-000000000301"),
+                            PaymentFrequencyId = new Guid("00001001-0000-0000-0000-000000001001"),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            StartDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 12000m
+                        },
+                        new
+                        {
+                            Id = new Guid("00000602-0000-0000-0000-000000000602"),
+                            ContractTypeId = new Guid("00000502-0000-0000-0000-000000000502"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 490, DateTimeKind.Utc).AddTicks(8670),
+                            CustomerId = new Guid("00000303-0000-0000-0000-000000000303"),
+                            EndDate = new DateTime(2025, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000301-0000-0000-0000-000000000301"),
+                            PaymentFrequencyId = new Guid("00001002-0000-0000-0000-000000001002"),
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            StartDate = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 6000m
+                        },
+                        new
+                        {
+                            Id = new Guid("00000603-0000-0000-0000-000000000603"),
+                            ContractTypeId = new Guid("00000503-0000-0000-0000-000000000503"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 490, DateTimeKind.Utc).AddTicks(8673),
+                            CustomerId = new Guid("00000301-0000-0000-0000-000000000301"),
+                            EndDate = new DateTime(2025, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            PaymentFrequencyId = new Guid("00001003-0000-0000-0000-000000001003"),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            StartDate = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 9000m
+                        },
+                        new
+                        {
+                            Id = new Guid("00000604-0000-0000-0000-000000000604"),
+                            ContractTypeId = new Guid("00000501-0000-0000-0000-000000000501"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 490, DateTimeKind.Utc).AddTicks(8676),
+                            CustomerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            EndDate = new DateTime(2025, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000303-0000-0000-0000-000000000303"),
+                            PaymentFrequencyId = new Guid("00001001-0000-0000-0000-000000001001"),
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            StartDate = new DateTime(2025, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 15000m
+                        },
+                        new
+                        {
+                            Id = new Guid("00000605-0000-0000-0000-000000000605"),
+                            ContractTypeId = new Guid("00000502-0000-0000-0000-000000000502"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 490, DateTimeKind.Utc).AddTicks(8679),
+                            CustomerId = new Guid("00000303-0000-0000-0000-000000000303"),
+                            EndDate = new DateTime(2025, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            PaymentFrequencyId = new Guid("00001005-0000-0000-0000-000000001005"),
+                            PropertyId = new Guid("00001805-0000-0000-0000-000000001805"),
+                            StartDate = new DateTime(2025, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 7500m
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.ContractType", b =>
@@ -282,6 +451,26 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContractTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000501-0000-0000-0000-000000000501"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 491, DateTimeKind.Utc).AddTicks(3451),
+                            Name = "Sale"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000502-0000-0000-0000-000000000502"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 491, DateTimeKind.Utc).AddTicks(3454),
+                            Name = "Rent"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000503-0000-0000-0000-000000000503"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 491, DateTimeKind.Utc).AddTicks(3455),
+                            Name = "Lease"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Country", b =>
@@ -308,6 +497,15 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 491, DateTimeKind.Utc).AddTicks(8234),
+                            ISOCode = "PS",
+                            Name = "Palestine"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Invoice", b =>
@@ -345,6 +543,58 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("InvoiceStatusId");
 
                     b.ToTable("Invoices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001901-0000-0000-0000-000000001901"),
+                            Amount = 1500.00m,
+                            ContractId = new Guid("00000601-0000-0000-0000-000000000601"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1960),
+                            DueDate = new DateTime(2025, 9, 17, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1968),
+                            InvoiceStatusId = new Guid("00000901-0000-0000-0000-000000000901"),
+                            IssueDate = new DateTime(2025, 8, 18, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1962)
+                        },
+                        new
+                        {
+                            Id = new Guid("00001902-0000-0000-0000-000000001902"),
+                            Amount = 2500.00m,
+                            ContractId = new Guid("00000602-0000-0000-0000-000000000602"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1973),
+                            DueDate = new DateTime(2025, 9, 7, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1974),
+                            InvoiceStatusId = new Guid("00000902-0000-0000-0000-000000000902"),
+                            IssueDate = new DateTime(2025, 8, 8, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1973)
+                        },
+                        new
+                        {
+                            Id = new Guid("00001903-0000-0000-0000-000000001903"),
+                            Amount = 3200.00m,
+                            ContractId = new Guid("00000603-0000-0000-0000-000000000603"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1975),
+                            DueDate = new DateTime(2025, 8, 23, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1976),
+                            InvoiceStatusId = new Guid("00000903-0000-0000-0000-000000000903"),
+                            IssueDate = new DateTime(2025, 7, 29, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1976)
+                        },
+                        new
+                        {
+                            Id = new Guid("00001904-0000-0000-0000-000000001904"),
+                            Amount = 4100.00m,
+                            ContractId = new Guid("00000604-0000-0000-0000-000000000604"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1978),
+                            DueDate = new DateTime(2025, 9, 12, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1982),
+                            InvoiceStatusId = new Guid("00000904-0000-0000-0000-000000000904"),
+                            IssueDate = new DateTime(2025, 8, 13, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1982)
+                        },
+                        new
+                        {
+                            Id = new Guid("00001905-0000-0000-0000-000000001905"),
+                            Amount = 5000.00m,
+                            ContractId = new Guid("00000605-0000-0000-0000-000000000605"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1984),
+                            DueDate = new DateTime(2025, 9, 22, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1985),
+                            InvoiceStatusId = new Guid("00000905-0000-0000-0000-000000000905"),
+                            IssueDate = new DateTime(2025, 8, 23, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(1984)
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.InvoiceStatus", b =>
@@ -367,6 +617,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InvoiceStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000901-0000-0000-0000-000000000901"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(3742),
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000902-0000-0000-0000-000000000902"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(3744),
+                            Name = "Paid"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000903-0000-0000-0000-000000000903"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(3746),
+                            Name = "Overdue"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000904-0000-0000-0000-000000000904"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(3747),
+                            Name = "Cancelled"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000905-0000-0000-0000-000000000905"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(3748),
+                            Name = "Refunded"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.NearbyPlace", b =>
@@ -400,6 +682,53 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PropertyId");
 
                     b.ToTable("NearbyPlaces");
+
+                    b.HasData(
+                        new
+                        {
+                            NearbyPlaceTypeId = new Guid("00000801-0000-0000-0000-000000000801"),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(9830),
+                            DistanceInKm = 0.5,
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Central Park"
+                        },
+                        new
+                        {
+                            NearbyPlaceTypeId = new Guid("00000802-0000-0000-0000-000000000802"),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(9834),
+                            DistanceInKm = 1.2,
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Metro Station"
+                        },
+                        new
+                        {
+                            NearbyPlaceTypeId = new Guid("00000803-0000-0000-0000-000000000803"),
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(9835),
+                            DistanceInKm = 2.5,
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Shopping Mall"
+                        },
+                        new
+                        {
+                            NearbyPlaceTypeId = new Guid("00000804-0000-0000-0000-000000000804"),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(9836),
+                            DistanceInKm = 1.8,
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "Hospital"
+                        },
+                        new
+                        {
+                            NearbyPlaceTypeId = new Guid("00000805-0000-0000-0000-000000000805"),
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 492, DateTimeKind.Utc).AddTicks(9837),
+                            DistanceInKm = 0.80000000000000004,
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Name = "School"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.NearbyPlaceType", b =>
@@ -422,6 +751,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NearbyPlaceTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000801-0000-0000-0000-000000000801"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(1861),
+                            Name = "School"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000802-0000-0000-0000-000000000802"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(1863),
+                            Name = "Hospital"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000803-0000-0000-0000-000000000803"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(1864),
+                            Name = "Shopping Center"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000804-0000-0000-0000-000000000804"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(1865),
+                            Name = "Park"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000805-0000-0000-0000-000000000805"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(1866),
+                            Name = "Restaurant"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PaymentFrequency", b =>
@@ -444,6 +805,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentFrequencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001001-0000-0000-0000-000000001001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(3619),
+                            Name = "Monthly"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001002-0000-0000-0000-000000001002"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(3621),
+                            Name = "Quarterly"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001003-0000-0000-0000-000000001003"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(3622),
+                            Name = "Annually"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001004-0000-0000-0000-000000001004"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(3623),
+                            Name = "Weekly"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001005-0000-0000-0000-000000001005"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(3625),
+                            Name = "Bi-Weekly"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PaymentMethod", b =>
@@ -465,6 +858,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentMethods");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001101-0000-0000-0000-000000001101"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(5807),
+                            Name = "Cash"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001102-0000-0000-0000-000000001102"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(5809),
+                            Name = "Credit Card"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001103-0000-0000-0000-000000001103"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(5810),
+                            Name = "Bank Transfer"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001104-0000-0000-0000-000000001104"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(5811),
+                            Name = "Mobile Wallet"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001105-0000-0000-0000-000000001105"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 493, DateTimeKind.Utc).AddTicks(5812),
+                            Name = "PayPal"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PriceUnit", b =>
@@ -512,6 +937,55 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PriceUnitTypeId");
 
                     b.ToTable("PriceUnits");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00002201-0000-0000-0000-000000002201"),
+                            Abbreviation = "m²",
+                            ConversionFactor = 1.0m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(859),
+                            Name = "Per Square Meter",
+                            PriceUnitTypeId = new Guid("00001301-0000-0000-0000-000000001301"),
+                            Symbol = "sqm"
+                        },
+                        new
+                        {
+                            Id = new Guid("00002202-0000-0000-0000-000000002202"),
+                            Abbreviation = "ft²",
+                            ConversionFactor = 0.092903m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(866),
+                            Name = "Per Square Foot",
+                            PriceUnitTypeId = new Guid("00001302-0000-0000-0000-000000001302"),
+                            Symbol = "sqft"
+                        },
+                        new
+                        {
+                            Id = new Guid("00002203-0000-0000-0000-000000002203"),
+                            Abbreviation = "mo",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(868),
+                            Name = "Per Month",
+                            PriceUnitTypeId = new Guid("00001303-0000-0000-0000-000000001303"),
+                            Symbol = "per month"
+                        },
+                        new
+                        {
+                            Id = new Guid("00002204-0000-0000-0000-000000002204"),
+                            Abbreviation = "yr",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(870),
+                            Name = "Per Year",
+                            PriceUnitTypeId = new Guid("00001304-0000-0000-0000-000000001304"),
+                            Symbol = "per year"
+                        },
+                        new
+                        {
+                            Id = new Guid("00002205-0000-0000-0000-000000002205"),
+                            Abbreviation = "total",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(879),
+                            Name = "Total Price",
+                            PriceUnitTypeId = new Guid("00001305-0000-0000-0000-000000001305"),
+                            Symbol = "total"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PriceUnitType", b =>
@@ -534,6 +1008,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PriceUnitTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001301-0000-0000-0000-000000001301"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(2553),
+                            Name = "Per Square Meter"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001302-0000-0000-0000-000000001302"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(2555),
+                            Name = "Per Square Foot"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001303-0000-0000-0000-000000001303"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(2557),
+                            Name = "Per Month"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001304-0000-0000-0000-000000001304"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(2558),
+                            Name = "Per Year"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001305-0000-0000-0000-000000001305"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(2559),
+                            Name = "Total Price"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Property", b =>
@@ -609,6 +1115,99 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("ZoneId");
 
                     b.ToTable("Properties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001801-0000-0000-0000-000000001801"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 496, DateTimeKind.Utc).AddTicks(9308),
+                            Description = "Modern 2-bedroom apartment in the city center",
+                            NumberOfBathrooms = 1,
+                            NumberOfBedrooms = 2,
+                            NumberOfFloors = 1,
+                            NumberOfGarage = 0,
+                            OwnerId = new Guid("00000301-0000-0000-0000-000000000301"),
+                            Price = 55000m,
+                            PriceUnitId = new Guid("00002205-0000-0000-0000-000000002205"),
+                            PropertyStatusId = new Guid("00001401-0000-0000-0000-000000001401"),
+                            Slug = "modern-apartment-nablus",
+                            YearBuilt = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ZoneId = new Guid("00000201-0000-0000-0000-000000000201")
+                        },
+                        new
+                        {
+                            Id = new Guid("00001802-0000-0000-0000-000000001802"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 496, DateTimeKind.Utc).AddTicks(9324),
+                            Description = "Spacious villa with garden and garage",
+                            NumberOfBathrooms = 3,
+                            NumberOfBedrooms = 4,
+                            NumberOfFloors = 2,
+                            NumberOfGarage = 1,
+                            OwnerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            Price = 250000m,
+                            PriceUnitId = new Guid("00002205-0000-0000-0000-000000002205"),
+                            PropertyStatusId = new Guid("00001401-0000-0000-0000-000000001401"),
+                            Slug = "villa-rafidia",
+                            YearBuilt = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ZoneId = new Guid("00000203-0000-0000-0000-000000000203")
+                        },
+                        new
+                        {
+                            Id = new Guid("00001803-0000-0000-0000-000000001803"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 496, DateTimeKind.Utc).AddTicks(9328),
+                            Description = "Affordable family home in Balata",
+                            NumberOfBathrooms = 2,
+                            NumberOfBedrooms = 3,
+                            NumberOfFloors = 2,
+                            NumberOfGarage = 0,
+                            OwnerId = new Guid("00000303-0000-0000-0000-000000000303"),
+                            Price = 80000m,
+                            PriceUnitId = new Guid("00002205-0000-0000-0000-000000002205"),
+                            PropertyStatusId = new Guid("00001401-0000-0000-0000-000000001401"),
+                            Slug = "balata-house",
+                            YearBuilt = new DateTime(2010, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ZoneId = new Guid("00000202-0000-0000-0000-000000000202")
+                        },
+                        new
+                        {
+                            Id = new Guid("00001804-0000-0000-0000-000000001804"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 496, DateTimeKind.Utc).AddTicks(9332),
+                            Description = "Small 1-bedroom apartment near market",
+                            NumberOfBathrooms = 1,
+                            NumberOfBedrooms = 1,
+                            NumberOfFloors = 1,
+                            NumberOfGarage = 0,
+                            OwnerId = new Guid("00000301-0000-0000-0000-000000000301"),
+                            Price = 30000m,
+                            PriceUnitId = new Guid("00002205-0000-0000-0000-000000002205"),
+                            PropertyStatusId = new Guid("00001404-0000-0000-0000-000000001404"),
+                            Slug = "askar-apartment",
+                            YearBuilt = new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ZoneId = new Guid("00000204-0000-0000-0000-000000000204")
+                        },
+                        new
+                        {
+                            Id = new Guid("00001805-0000-0000-0000-000000001805"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 496, DateTimeKind.Utc).AddTicks(9336),
+                            Description = "Empty land for investment",
+                            OwnerId = new Guid("00000302-0000-0000-0000-000000000302"),
+                            Price = 150000m,
+                            PriceUnitId = new Guid("00002205-0000-0000-0000-000000002205"),
+                            PropertyStatusId = new Guid("00001401-0000-0000-0000-000000001401"),
+                            Slug = "beit-furiq-land",
+                            YearBuilt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ZoneId = new Guid("00000205-0000-0000-0000-000000000205")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyAmenity", b =>
@@ -633,6 +1232,43 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("AmenityId");
 
                     b.ToTable("PropertyAmenities");
+
+                    b.HasData(
+                        new
+                        {
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            AmenityId = new Guid("00000401-0000-0000-0000-000000000401"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(6949),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            AmenityId = new Guid("00000402-0000-0000-0000-000000000402"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(6951),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            AmenityId = new Guid("00000403-0000-0000-0000-000000000403"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(6952),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            AmenityId = new Guid("00000404-0000-0000-0000-000000000404"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(6953),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            AmenityId = new Guid("00000405-0000-0000-0000-000000000405"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 494, DateTimeKind.Utc).AddTicks(6953),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyCategory", b =>
@@ -655,6 +1291,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001601-0000-0000-0000-000000001601"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(7580),
+                            Name = "Apartment"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001602-0000-0000-0000-000000001602"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(7583),
+                            Name = "Villa"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001603-0000-0000-0000-000000001603"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(7584),
+                            Name = "Townhouse"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001604-0000-0000-0000-000000001604"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(7585),
+                            Name = "Office"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001605-0000-0000-0000-000000001605"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(7586),
+                            Name = "Retail"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyCategoryAssociation", b =>
@@ -679,6 +1347,43 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PropertyCategoryId");
 
                     b.ToTable("PropertyCategoryAssociations");
+
+                    b.HasData(
+                        new
+                        {
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            PropertyCategoryId = new Guid("00001601-0000-0000-0000-000000001601"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(5535),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            PropertyCategoryId = new Guid("00001602-0000-0000-0000-000000001602"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(5538),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            PropertyCategoryId = new Guid("00001603-0000-0000-0000-000000001603"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(5539),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            PropertyCategoryId = new Guid("00001604-0000-0000-0000-000000001604"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(5539),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001805-0000-0000-0000-000000001805"),
+                            PropertyCategoryId = new Guid("00001605-0000-0000-0000-000000001605"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 495, DateTimeKind.Utc).AddTicks(5540),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyFeature", b =>
@@ -701,6 +1406,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyFeatures");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001501-0000-0000-0000-000000001501"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(6120),
+                            Name = "Swimming Pool"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001502-0000-0000-0000-000000001502"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(6122),
+                            Name = "Gym"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001503-0000-0000-0000-000000001503"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(6123),
+                            Name = "Balcony"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001504-0000-0000-0000-000000001504"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(6124),
+                            Name = "Garden"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001505-0000-0000-0000-000000001505"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(6125),
+                            Name = "Garage"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyFeatureAssociation", b =>
@@ -729,6 +1466,48 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PropertyFeatureId");
 
                     b.ToTable("PropertyFeatureAssociations");
+
+                    b.HasData(
+                        new
+                        {
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            PropertyFeatureId = new Guid("00001501-0000-0000-0000-000000001501"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(4314),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Value = ""
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            PropertyFeatureId = new Guid("00001502-0000-0000-0000-000000001502"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(4316),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Value = ""
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            PropertyFeatureId = new Guid("00001503-0000-0000-0000-000000001503"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(4318),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Value = ""
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            PropertyFeatureId = new Guid("00001504-0000-0000-0000-000000001504"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(4318),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Value = ""
+                        },
+                        new
+                        {
+                            PropertyId = new Guid("00001805-0000-0000-0000-000000001805"),
+                            PropertyFeatureId = new Guid("00001505-0000-0000-0000-000000001505"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(4319),
+                            Id = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Value = ""
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyImage", b =>
@@ -760,6 +1539,48 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("PropertyId");
 
                     b.ToTable("PropertyImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001701-0000-0000-0000-000000001701"),
+                            AltText = "Front view of the property",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(8329),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            Url = "https://example.com/images/property1-front.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001702-0000-0000-0000-000000001702"),
+                            AltText = "Spacious living room",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(8331),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            Url = "https://example.com/images/property1-livingroom.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001703-0000-0000-0000-000000001703"),
+                            AltText = "Master bedroom",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(8332),
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            Url = "https://example.com/images/property2-bedroom.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001704-0000-0000-0000-000000001704"),
+                            AltText = "Balcony view",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(8333),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            Url = "https://example.com/images/property3-balcony.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001705-0000-0000-0000-000000001705"),
+                            AltText = "Modern kitchen",
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 497, DateTimeKind.Utc).AddTicks(8340),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            Url = "https://example.com/images/property3-kitchen.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyReview", b =>
@@ -805,6 +1626,63 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PropertyReviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00002301-0000-0000-0000-000000002301"),
+                            Comment = "Amazing property, well-maintained and spacious.",
+                            ContractId = new Guid("00000601-0000-0000-0000-000000000601"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(4887),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            Rating = 4.75m,
+                            TransactionId = new Guid("00002101-0000-0000-0000-000000002101"),
+                            UserId = new Guid("00000301-0000-0000-0000-000000000301")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002302-0000-0000-0000-000000002302"),
+                            Comment = "Beautiful villa with a lovely garden.",
+                            ContractId = new Guid("00000602-0000-0000-0000-000000000602"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(4892),
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            Rating = 4.90m,
+                            TransactionId = new Guid("00002102-0000-0000-0000-000000002102"),
+                            UserId = new Guid("00000302-0000-0000-0000-000000000302")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002303-0000-0000-0000-000000002303"),
+                            Comment = "Cozy townhouse, perfect for a small family.",
+                            ContractId = new Guid("00000603-0000-0000-0000-000000000603"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(4894),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            Rating = 4.50m,
+                            TransactionId = new Guid("00002103-0000-0000-0000-000000002103"),
+                            UserId = new Guid("00000303-0000-0000-0000-000000000303")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002304-0000-0000-0000-000000002304"),
+                            Comment = "Spacious office space with excellent location.",
+                            ContractId = new Guid("00000604-0000-0000-0000-000000000604"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(4895),
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            Rating = 4.30m,
+                            TransactionId = new Guid("00002104-0000-0000-0000-000000002104"),
+                            UserId = new Guid("00000301-0000-0000-0000-000000000301")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002305-0000-0000-0000-000000002305"),
+                            Comment = "Retail space in a busy area, good investment.",
+                            ContractId = new Guid("00000605-0000-0000-0000-000000000605"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(4896),
+                            PropertyId = new Guid("00001805-0000-0000-0000-000000001805"),
+                            Rating = 4.60m,
+                            TransactionId = new Guid("00002105-0000-0000-0000-000000002105"),
+                            UserId = new Guid("00000302-0000-0000-0000-000000000302")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyStatus", b =>
@@ -827,6 +1705,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001401-0000-0000-0000-000000001401"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(7263),
+                            Name = "Available"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001402-0000-0000-0000-000000001402"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(7265),
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001403-0000-0000-0000-000000001403"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(7266),
+                            Name = "Sold"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001404-0000-0000-0000-000000001404"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(7267),
+                            Name = "Rented"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001405-0000-0000-0000-000000001405"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 499, DateTimeKind.Utc).AddTicks(7268),
+                            Name = "Under Maintenance"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyTourRequest", b =>
@@ -866,6 +1776,58 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PropertyTourRequests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00002001-0000-0000-0000-000000002001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(1353),
+                            Message = "",
+                            PreferredDateTime = new DateTime(2025, 8, 30, 20, 1, 32, 500, DateTimeKind.Utc).AddTicks(1354),
+                            PropertyId = new Guid("00001801-0000-0000-0000-000000001801"),
+                            PropertyTourRequestStatusId = new Guid("00001201-0000-0000-0000-000000001201"),
+                            UserId = new Guid("00000301-0000-0000-0000-000000000301")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002002-0000-0000-0000-000000002002"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(1362),
+                            Message = "",
+                            PreferredDateTime = new DateTime(2025, 9, 1, 0, 1, 32, 500, DateTimeKind.Utc).AddTicks(1363),
+                            PropertyId = new Guid("00001802-0000-0000-0000-000000001802"),
+                            PropertyTourRequestStatusId = new Guid("00001202-0000-0000-0000-000000001202"),
+                            UserId = new Guid("00000302-0000-0000-0000-000000000302")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002003-0000-0000-0000-000000002003"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(1364),
+                            Message = "",
+                            PreferredDateTime = new DateTime(2025, 8, 30, 2, 1, 32, 500, DateTimeKind.Utc).AddTicks(1364),
+                            PropertyId = new Guid("00001803-0000-0000-0000-000000001803"),
+                            PropertyTourRequestStatusId = new Guid("00001203-0000-0000-0000-000000001203"),
+                            UserId = new Guid("00000303-0000-0000-0000-000000000303")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002004-0000-0000-0000-000000002004"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(1365),
+                            Message = "",
+                            PreferredDateTime = new DateTime(2025, 9, 2, 21, 1, 32, 500, DateTimeKind.Utc).AddTicks(1366),
+                            PropertyId = new Guid("00001804-0000-0000-0000-000000001804"),
+                            PropertyTourRequestStatusId = new Guid("00001204-0000-0000-0000-000000001204"),
+                            UserId = new Guid("00000301-0000-0000-0000-000000000301")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002005-0000-0000-0000-000000002005"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(1367),
+                            Message = "",
+                            PreferredDateTime = new DateTime(2025, 9, 1, 19, 1, 32, 500, DateTimeKind.Utc).AddTicks(1367),
+                            PropertyId = new Guid("00001805-0000-0000-0000-000000001805"),
+                            PropertyTourRequestStatusId = new Guid("00001205-0000-0000-0000-000000001205"),
+                            UserId = new Guid("00000302-0000-0000-0000-000000000302")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.PropertyTourRequestStatus", b =>
@@ -888,6 +1850,38 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyTourRequestStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00001201-0000-0000-0000-000000001201"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(3401),
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001202-0000-0000-0000-000000001202"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(3403),
+                            Name = "Confirmed"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001203-0000-0000-0000-000000001203"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(3404),
+                            Name = "Rescheduled"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001204-0000-0000-0000-000000001204"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(3405),
+                            Name = "Completed"
+                        },
+                        new
+                        {
+                            Id = new Guid("00001205-0000-0000-0000-000000001205"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 500, DateTimeKind.Utc).AddTicks(3405),
+                            Name = "Canceled"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Transaction", b =>
@@ -934,6 +1928,58 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("TransactionStatusId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00002101-0000-0000-0000-000000002101"),
+                            AmountPaid = 1500.00m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 501, DateTimeKind.Utc).AddTicks(8482),
+                            InvoiceId = new Guid("00001901-0000-0000-0000-000000001901"),
+                            PaymentMethodId = new Guid("00001101-0000-0000-0000-000000001101"),
+                            TransactionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TransactionStatusId = new Guid("00000701-0000-0000-0000-000000000701")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002102-0000-0000-0000-000000002102"),
+                            AmountPaid = 3000.00m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 501, DateTimeKind.Utc).AddTicks(8487),
+                            InvoiceId = new Guid("00001902-0000-0000-0000-000000001902"),
+                            PaymentMethodId = new Guid("00001102-0000-0000-0000-000000001102"),
+                            TransactionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TransactionStatusId = new Guid("00000702-0000-0000-0000-000000000702")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002103-0000-0000-0000-000000002103"),
+                            AmountPaid = 2000.00m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 501, DateTimeKind.Utc).AddTicks(8489),
+                            InvoiceId = new Guid("00001903-0000-0000-0000-000000001903"),
+                            PaymentMethodId = new Guid("00001103-0000-0000-0000-000000001103"),
+                            TransactionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TransactionStatusId = new Guid("00000703-0000-0000-0000-000000000703")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002104-0000-0000-0000-000000002104"),
+                            AmountPaid = 4500.00m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 501, DateTimeKind.Utc).AddTicks(8490),
+                            InvoiceId = new Guid("00001904-0000-0000-0000-000000001904"),
+                            PaymentMethodId = new Guid("00001104-0000-0000-0000-000000001104"),
+                            TransactionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TransactionStatusId = new Guid("00000704-0000-0000-0000-000000000704")
+                        },
+                        new
+                        {
+                            Id = new Guid("00002105-0000-0000-0000-000000002105"),
+                            AmountPaid = 5000.00m,
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 501, DateTimeKind.Utc).AddTicks(8491),
+                            InvoiceId = new Guid("00001905-0000-0000-0000-000000001905"),
+                            PaymentMethodId = new Guid("00001105-0000-0000-0000-000000001105"),
+                            TransactionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TransactionStatusId = new Guid("00000701-0000-0000-0000-000000000701")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.TransactionStatus", b =>
@@ -956,6 +2002,32 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransactionStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000701-0000-0000-0000-000000000701"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(478),
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000702-0000-0000-0000-000000000702"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(480),
+                            Name = "Completed"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000703-0000-0000-0000-000000000703"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(481),
+                            Name = "Cancelled"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000704-0000-0000-0000-000000000704"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(482),
+                            Name = "Failed"
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.User", b =>
@@ -1059,6 +2131,65 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("ZoneId");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000301-0000-0000-0000-000000000301"),
+                            AccessFailedCount = 0,
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            ConcurrencyStamp = "d0396134-d32b-4231-a086-e7a57c3358df",
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(6615),
+                            Email = "diaa@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Diaa",
+                            LastName = "Sharqawi",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            ProfileImageUrl = "",
+                            TwoFactorEnabled = false,
+                            UserName = "diaa.sharqawi",
+                            ZoneId = new Guid("00000201-0000-0000-0000-000000000201")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000302-0000-0000-0000-000000000302"),
+                            AccessFailedCount = 0,
+                            CityId = new Guid("00000102-0000-0000-0000-000000000102"),
+                            ConcurrencyStamp = "51fb9701-b5f2-4f41-b8c2-a806e2094a18",
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(6641),
+                            Email = "sara@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Sara",
+                            LastName = "AbuBakr",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            ProfileImageUrl = "",
+                            TwoFactorEnabled = false,
+                            UserName = "sara.abubakr",
+                            ZoneId = new Guid("00000202-0000-0000-0000-000000000202")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000303-0000-0000-0000-000000000303"),
+                            AccessFailedCount = 0,
+                            CityId = new Guid("00000103-0000-0000-0000-000000000103"),
+                            ConcurrencyStamp = "70e4927a-b94e-41c3-99f2-2a941efc6617",
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(6645),
+                            Email = "omar@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Omar",
+                            LastName = "Haddad",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            ProfileImageUrl = "",
+                            TwoFactorEnabled = false,
+                            UserName = "omar.haddad",
+                            ZoneId = new Guid("00000203-0000-0000-0000-000000000203")
+                        });
                 });
 
             modelBuilder.Entity("Realty_Management_System_Domain.Entities.Zone", b =>
@@ -1101,6 +2232,63 @@ namespace Realty_Management_System_Infrastructure.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Zones");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000201-0000-0000-0000-000000000201"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(9080),
+                            Latitude = 32.2215m,
+                            Longitude = 35.2540m,
+                            Name = "Old City",
+                            PostalCode = "NBL-001"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000202-0000-0000-0000-000000000202"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(9087),
+                            Latitude = 32.2250m,
+                            Longitude = 35.2590m,
+                            Name = "Balata",
+                            PostalCode = "NBL-002"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000203-0000-0000-0000-000000000203"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(9089),
+                            Latitude = 32.2160m,
+                            Longitude = 35.2470m,
+                            Name = "Rafidia",
+                            PostalCode = "NBL-003"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000204-0000-0000-0000-000000000204"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(9091),
+                            Latitude = 32.2300m,
+                            Longitude = 35.2600m,
+                            Name = "Askar",
+                            PostalCode = "NBL-004"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000205-0000-0000-0000-000000000205"),
+                            CityId = new Guid("00000101-0000-0000-0000-000000000101"),
+                            CountryId = new Guid("00000001-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2025, 8, 28, 10, 1, 32, 502, DateTimeKind.Utc).AddTicks(9093),
+                            Latitude = 32.2400m,
+                            Longitude = 35.2700m,
+                            Name = "Beit Furiq",
+                            PostalCode = "NBL-005"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
